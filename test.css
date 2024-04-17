@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#api-url-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#api-url {
+    color: #333;
+    background-color: #f7f7f7;
+    border: 1px solid #e1e1e1;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#api-content-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#api-content {
+    color: #333;
+    background-color: #f7f7f7;
+    border: 1px solid #e1e1e1;
+    padding: 10px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
