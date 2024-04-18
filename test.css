@@ -1,35 +1,248 @@
-body {
-    font-family: Arial, sans-serif;
+/*footer menu*/
+.footer-menu {
+    width: 35%;
+    height: 60%;
+    margin-left: 7%;
+    margin-top: 4%
 }
 
-#api-url-container {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.footer-menu>tbody>tr>td>a {
+    text-align: left;
+    color: #ae8b75;
+    font-size: 23px;
+    font-family: 'Jost';
+    font-weight: 500;
+    word-wrap: break-word;
+    width: 50%;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-#api-url {
-    color: #333;
-    background-color: #f7f7f7;
-    border: 1px solid #e1e1e1;
+.footer-menu>tbody>tr>td>a:hover {
+    color: #d7c5ba;
+}
+
+.footer-menu>tbody>tr>td>a.active {
+    color: #ffffff;
+}
+
+/*header menu*/
+.header-menu {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+
+}
+
+.header-menu>tbody>tr>td>a {
+    text-align: left;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Jost';
+    font-weight: 500;
+    word-wrap: break-word;
+    width: 20%;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.3s;
     padding: 10px;
-    border-radius: 4px;
+    margin: 0;
 }
 
-#api-content-container {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.header-menu>tbody>tr>td>a:hover {
+    color: #d7c5ba;
 }
 
-#api-content {
-    color: #333;
-    background-color: #f7f7f7;
-    border: 1px solid #e1e1e1;
-    padding: 10px;
-    border-radius: 4px;
-    white-space: pre-wrap;
-    overflow-x: auto;
+.header-menu>tbody>tr>td>a.active {
+    color: #7ab530;
+}
+
+/*Bar chart effect*/
+.u-progress-container {
+    position: relative;
+    width: 40%;
+    height: 50px;
+    border-radius: 25px;
+    background-color: gray;
+    /* Adjust as necessary */
+    margin: auto;
+}
+
+.u-text-above {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: 'Jost';
+    cursor: pointer;
+    z-index: 10;
+}
+
+.u-progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: orange;
+    border-radius: 25px;
+    transition: width 2s;
+    /* Animation time */
+}
+
+.u-text-below {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: 'Jost';
+    opacity: 0;
+    transition: opacity 2s;
+    /* Animation time */
+    transition-delay: 1s;
+    /* Delay to match progress bar animation */
+}
+
+/*Bar chart effect*/
+.k-progress-container {
+    position: relative;
+    width: 40%;
+    height: 50px;
+    border-radius: 25px;
+    background-color: gray;
+    /* Adjust as necessary */
+    margin: auto;
+}
+
+.k-text-above {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: 'Jost';
+    cursor: pointer;
+    z-index: 10;
+}
+
+.k-progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: orange;
+    border-radius: 25px;
+    transition: width 2s;
+    /* Animation time */
+}
+
+.k-text-below {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Jost';
+    opacity: 0;
+    transition: opacity 2s;
+    /* Animation time */
+    transition-delay: 1s;
+    /* Delay to match progress bar animation */
+}
+
+/*discover our*/
+.discover-our-box {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 85%;
+    height: 400px;
+    background: #5E7153;
+    border-bottom-right-radius: 60px;
+    border-top-right-radius: 60px;
+    margin-top: 100px;
+    transition: background-color 0.3s;
+    flex-direction: row;
+}
+
+.discover-our-button {
+    padding: 16px 60px;
+    background-color: #fcfce4;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.discover-our-button:hover {
+    transform: scale(1.1);
+}
+
+.discover-our-box:hover {
+    background-color: #536449;
+}
+
+.discover-our-image {
+    width: 80%;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 0;
+    transition: transform 0.3s ease;
+    overflow: hidden
+}
+
+.discover-our-image:hover {
+    transform: scale(1.1);
+}
+
+/*plant doctor*/
+.plant-doctor-box {
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    position: relative;
+    width: 85%;
+    height: 400px;
+    background: #617B17;
+    border-bottom-left-radius: 60px;
+    border-top-left-radius: 60px;
+    margin-top: 100px;
+    transition: background-color 0.3s;
+    flex-direction: row-reverse;
+}
+
+.plant-doctor-button {
+    padding: 16px 60px;
+    background-color: #fcfce4;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.plant-doctor-button:hover {
+    transform: scale(1.1);
+}
+
+.plant-doctor-box:hover {
+    background-color: #526815;
+}
+
+.plant-doctor-image {
+    width: 80%;
+    transition: transform 0.3s ease;
+}
+
+.plant-doctor-image:hover {
+    transform: scale(1.1);
 }
