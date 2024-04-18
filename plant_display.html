@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Data</title>
+    <link rel="stylesheet" href="test.css">
+
+    <style>
+        /* CSS for image scale */
+        .plant-image {
+            width: 250px;
+            /* Set a slightly larger width for the image */
+            height: auto;
+            /* Maintain aspect ratio */
+            display: block;
+            /* Ensure the image is displayed as a block element */
+            margin-bottom: 10px;
+            /* Add some margin to separate images */
+        }
+
+        /* CSS for dropdown default */
+        .default-option {
+            color: gray;
+            /* Set the color for the default option */
+        }
+    </style>
+</head>
+
+<body style="margin-top: 150px;">
+
+    <!--Header-->
+    <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
+        <div
+            style="width: 100%; height: 130px; position: relative; background: #5e7153; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+
+            <!--Header logo-->
+            <div style="width: 40%;">
+                <image style="width: 25%;" src="http://54.66.87.212/wp-content/uploads/2024/04/Logo.png">
+            </div>
+
+            <!--Header menu-->
+            <div style="width: 60%;">
+                <table class="header-menu">
+                    <tr>
+                        <td><a href="#">Home</a></td>
+                        <td><a href="#">About Us</a></td>
+                        <td><a href="#">Plant Library</a></td>
+                        <td><a href="#">Gardening Vitals</a></td>
+                        <td><a href="#">Gardening Module</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </header>
+
+    <h1>Plant Data</h1>
+    <div style="position: relative;">
+        <select id="plantSelect" onchange="displayPlantDetails()">
+            <option value="" class="default-option" selected>Select a Common Name</option>
+        </select>
+
+        <div id="plantDetails">
+            <!-- Placeholder for plant details -->
+        </div>
+    </div>
+
+    <script>
+        // Declare the parsed variable outside the fetchPlantData function
+        let parsed;
+
+        // Function to fetch plant data from the backend API
+        async function fetchPlantData() {
+            try {
+                const response = await fetch('https://backendapiteam23.azurewebsites.net/plant_data');
+                const data = await response.json();
+
+                console.log(typeof data); // Check the type of data
+                parsed = JSON.parse(data); // Assign data to the parsed variable
+
+                // Check if data is an array
+                if (Array.isArray(parsed)) {
+                    // Clear previous options
+                    const plantSelect = document.getElementById('plantSelect');
+                    plantSelect.innerHTML = '<option value="" class="default-option" selected>Select a Common Name</option>'; // Add default option
+                    // Populate dropdown with common names
+                    parsed.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item['Common Name'];
+                        option.textContent = item['Common Name'];
+                        plantSelect.appendChild(option); // Append option to select element
+                    });
+                } else {
+                    throw new Error('No data received');
+                }
+            } catch (error) {
+                console.error('Error fetching plant data:', error.message);
+                document.getElementById('plantSelect').innerHTML = '<option value="" class="default-option" selected>Error fetching data</option>';
+            }
+        }
+
+        // Call fetchPlantData function when the page loads
+        window.onload = fetchPlantData;
+
+        // Function to display plant details
+        function displayPlantDetails() {
+            const selectedCommonName = document.getElementById('plantSelect').value;
+            const plantDetailsContainer = document.getElementById('plantDetails');
+
+            // Check if a common name is selected
+            if (selectedCommonName) {
+                // Find the plant data corresponding to the selected common name
+                const selectedPlant = parsed.find(plant => plant['Common Name'] === selectedCommonName);
+
+                // Display the details in the plantDetailsContainer
+                if (selectedPlant) {
+                    plantDetailsContainer.innerHTML = `
+                        <h2>${selectedPlant['Common Name']}</h2>
+                        <img src="${selectedPlant['Image Url']}" alt="${selectedPlant['Common Name']} Image" class="plant-image">
+                        <p><strong>Botanical Name</strong>: ${selectedPlant['Botanical Name']}</p>
+                        <p><strong>Description</strong>: ${selectedPlant['Description']}</p>
+                        <p><strong>Plant Type</strong>: ${selectedPlant['Plant Type']}</p>
+                        <p><strong>Water Needs</strong>: ${selectedPlant['Water Needs']}</p>
+                        
+                        <p><strong>Maintenance</strong>: ${selectedPlant['Maintenance']}</p>
+                        
+                    `;
+                } else {
+                    plantDetailsContainer.innerHTML = '<p>No details found for the selected plant</p>';
+                }
+            } else {
+                plantDetailsContainer.innerHTML = '<p>Select a common name to view details</p>';
+            }
+        }
+    </script>
+
+    <!--Footer logo-->
+    <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
+        <div style="position: relative; width: 50%; left:5%;">
+            <span
+                style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
+            </span>
+            <span style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
+                Marshmallows 2024
+            </span>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
