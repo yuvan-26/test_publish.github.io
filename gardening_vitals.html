@@ -20,7 +20,8 @@
 
         #plotly-chart {
             width: 100%;
-            max-width: 1000px; /* Limit chart width */
+            max-width: 1000px;
+            /* Limit chart width */
             text-align: center;
             color: #121f0c;
             font-size: 50px;
@@ -60,7 +61,7 @@
     <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
         <div
             style="width: 100%; height: 130px; position: relative; background: #5e7153; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
-            
+
             <!--Header logo-->
             <div style="width: 40%;">
                 <a href="./index.html">
@@ -73,10 +74,10 @@
                 <table class="header-menu">
                     <tr>
                         <td><a href="./index.html">Home</a></td>
-                        <td><a href="./about_us.html">About Us</a></td>
                         <td><a href="./plant_library.html">Plant Library</a></td>
-                        <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                        <td><a href="./gardening_vitals.html" class="active">Gardening Vitals</a></td>
                         <td><a href="#">Gardening Module</a></td>
+                        <td><a href="./about_us.html">About Us</a></td>
                     </tr>
                 </table>
             </div>
@@ -113,56 +114,56 @@
     </div>
 
     <!-- JavaScript for Rendering Chart -->
-<script>
-    function updateChart() {
-        var waterLevel = document.getElementById("water-level-dropdown").value;
-        Plotly.d3.csv('Gardening Crops.csv', function(data) {
-            var desiredLabels = ['Turmeric', 'Spinach', 'Beet', 'Chilli', 'Snake Gouard', 'Pepper', 'Cinnamon', 'Lime', 'Tomato', 'Sweet Potato', 'Ginger', 'Brinjals', 'Capsicum', 'Cucumber', 'Pumpkin', 'Orange'];
-            var filteredData = data.filter(function(row) {
-                return desiredLabels.includes(row.Label) && row.Waterlevel === waterLevel;
+    <script>
+        function updateChart() {
+            var waterLevel = document.getElementById("water-level-dropdown").value;
+            Plotly.d3.csv('Gardening Crops.csv', function (data) {
+                var desiredLabels = ['Turmeric', 'Spinach', 'Beet', 'Chilli', 'Snake Gouard', 'Pepper', 'Cinnamon', 'Lime', 'Tomato', 'Sweet Potato', 'Ginger', 'Brinjals', 'Capsicum', 'Cucumber', 'Pumpkin', 'Orange'];
+                var filteredData = data.filter(function (row) {
+                    return desiredLabels.includes(row.Label) && row.Waterlevel === waterLevel;
+                });
+
+                var avgTempByLabel = {};
+                var countByLabel = {};
+
+                filteredData.forEach(function (row) {
+                    if (!avgTempByLabel[row.Label]) {
+                        avgTempByLabel[row.Label] = 0;
+                        countByLabel[row.Label] = 0;
+                    }
+                    avgTempByLabel[row.Label] += parseFloat(row.Temperature);
+                    countByLabel[row.Label]++;
+                });
+
+                var labels = Object.keys(avgTempByLabel);
+                var avgTemperatures = labels.map(function (label) {
+                    return avgTempByLabel[label] / countByLabel[label];
+                });
+
+                var colors = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324'];
+
+                var trace = {
+                    x: labels,
+                    y: avgTemperatures,
+                    type: 'bar',
+                    marker: {
+                        color: colors
+                    }
+                };
+
+                var layout = {
+                    title: 'Average Temperature by Label for ' + waterLevel + ' Water Level',
+                    xaxis: { title: 'Label', tickfont: { family: 'Jost' } }, // Set font family for x-axis labels
+                    yaxis: { title: 'Average Temperature', tickfont: { family: 'Jost' } } // Set font family for y-axis labels
+                };
+
+                Plotly.newPlot('plotly-chart', [trace], layout);
             });
+        }
 
-            var avgTempByLabel = {};
-            var countByLabel = {};
-
-            filteredData.forEach(function(row) {
-                if (!avgTempByLabel[row.Label]) {
-                    avgTempByLabel[row.Label] = 0;
-                    countByLabel[row.Label] = 0;
-                }
-                avgTempByLabel[row.Label] += parseFloat(row.Temperature);
-                countByLabel[row.Label]++;
-            });
-
-            var labels = Object.keys(avgTempByLabel);
-            var avgTemperatures = labels.map(function(label) {
-                return avgTempByLabel[label] / countByLabel[label];
-            });
-
-            var colors = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324'];
-
-            var trace = {
-                x: labels,
-                y: avgTemperatures,
-                type: 'bar',
-                marker: {
-                    color: colors
-                }
-            };
-
-            var layout = {
-                title: 'Average Temperature by Label for ' + waterLevel + ' Water Level',
-                xaxis: { title: 'Label', tickfont: { family: 'Jost' } }, // Set font family for x-axis labels
-                yaxis: { title: 'Average Temperature', tickfont: { family: 'Jost' } } // Set font family for y-axis labels
-            };
-
-            Plotly.newPlot('plotly-chart', [trace], layout);
-        });
-    }
-
-    // Call updateChart initially to show default chart
-    updateChart();
-</script>
+        // Call updateChart initially to show default chart
+        updateChart();
+    </script>
 
 
     <!-- Placeholder for plant details -->
@@ -195,7 +196,7 @@
                     <td><a href="#">Plant Doctor</a></td>
                 </tr>
                 <tr>
-                    <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                    <td><a href="./gardening_vitals.html" class="active">Gardening Vitals</a></td>
                     <td><a href="#">Floral Arrangements</a></td>
                 </tr>
                 <tr>

@@ -37,7 +37,7 @@
 
 .header-menu>tbody>tr>td>a {
     text-align: left;
-    color: #ffffff;
+    color: #9abc70;
     font-size: 20px;
     font-family: 'Jost';
     font-weight: 500;
@@ -51,11 +51,11 @@
 }
 
 .header-menu>tbody>tr>td>a:hover {
-    color: #d7c5ba;
+    color: #FFFFFF;
 }
 
 .header-menu>tbody>tr>td>a.active {
-    color: #7ab530;
+    color: #FFFFFF;
 }
 
 /*Bar chart effect*/
