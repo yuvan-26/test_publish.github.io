@@ -20,8 +20,7 @@
 
         #plotly-chart {
             width: 100%;
-            max-width: 1000px;
-            /* Limit chart width */
+            max-width: 1000px; /* Limit chart width */
             text-align: center;
             color: #121f0c;
             font-size: 50px;
@@ -61,7 +60,7 @@
     <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
         <div
             style="width: 100%; height: 130px; position: relative; background: #5e7153; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
-
+            
             <!--Header logo-->
             <div style="width: 40%;">
                 <a href="./index.html">
@@ -69,20 +68,20 @@
                 </a>
             </div>
 
-            <!--Header menu-->
-            <div style="width: 60%;">
-                <table class="header-menu">
-                    <tr>
-                        <td><a href="./index.html">Home</a></td>
-                        <td><a href="./plant_library.html">Plant Library</a></td>
-                        <td><a href="./gardening_vitals.html" class="active">Gardening Vitals</a></td>
-                        <td><a href="#">Gardening Module</a></td>
-                        <td><a href="./about_us.html">About Us</a></td>
-                    </tr>
-                </table>
-            </div>
+           <!--Header menu-->
+           <div style="width: 60%;">
+            <table class="header-menu">
+                <tr>
+                    <td><a href="./index.html">Home</a></td>
+                    <td><a href="./plant_library.html" class="active">Plant Library</a></td>
+                    <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                    <td><a href="#">Gardening Module</a></td>
+                    <td><a href="./about_us.html">About Us</a></td>
+                </tr>
+            </table>
         </div>
-    </header>
+    </div>
+</header>
 
     <div
         style="width: 100%; text-align: center; color: #121f0c; font-size: 50px; font-family: 'Jost'; font-weight: 500; word-wrap: break-word; margin-bottom: 40px;">
@@ -117,16 +116,16 @@
     <script>
         function updateChart() {
             var waterLevel = document.getElementById("water-level-dropdown").value;
-            Plotly.d3.csv('Gardening Crops.csv', function (data) {
+            Plotly.d3.csv('Gardening Crops.csv', function(data) {
                 var desiredLabels = ['Turmeric', 'Spinach', 'Beet', 'Chilli', 'Snake Gouard', 'Pepper', 'Cinnamon', 'Lime', 'Tomato', 'Sweet Potato', 'Ginger', 'Brinjals', 'Capsicum', 'Cucumber', 'Pumpkin', 'Orange'];
-                var filteredData = data.filter(function (row) {
+                var filteredData = data.filter(function(row) {
                     return desiredLabels.includes(row.Label) && row.Waterlevel === waterLevel;
                 });
-
+    
                 var avgTempByLabel = {};
                 var countByLabel = {};
-
-                filteredData.forEach(function (row) {
+    
+                filteredData.forEach(function(row) {
                     if (!avgTempByLabel[row.Label]) {
                         avgTempByLabel[row.Label] = 0;
                         countByLabel[row.Label] = 0;
@@ -134,11 +133,12 @@
                     avgTempByLabel[row.Label] += parseFloat(row.Temperature);
                     countByLabel[row.Label]++;
                 });
-
+    
                 var labels = Object.keys(avgTempByLabel);
-                var avgTemperatures = labels.map(function (label) {
+                var avgTemperatures = labels.map(function(label) {
                     return avgTempByLabel[label] / countByLabel[label];
                 });
+
 
                 // Sort labels and avgTemperatures in ascending order based on avgTemperatures
                 var dataCombined = labels.map(function (_, i) {
@@ -158,20 +158,21 @@
                         color: colors
                     }
                 };
-
+    
                 var layout = {
                     title: 'Average Temperature by Label for ' + waterLevel + ' Water Level',
                     xaxis: { title: 'Label', tickfont: { family: 'Jost' } }, // Set font family for x-axis labels
                     yaxis: { title: 'Average Temperature', tickfont: { family: 'Jost' } } // Set font family for y-axis labels
                 };
-
+    
                 Plotly.newPlot('plotly-chart', [trace], layout);
             });
         }
-
+    
         // Call updateChart initially to show default chart
         updateChart();
     </script>
+    
 
 
 
@@ -213,8 +214,8 @@
                 </tr>
             </table>
 
-            <!--Footer logo-->
-            <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
+             <!--Footer logo-->
+             <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
                 <div style="position: relative; width: 50%; left:5%;">
                     <span
                         style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
