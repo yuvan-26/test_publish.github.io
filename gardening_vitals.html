@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="test.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
-    <title>Gardening Vitals</title>
+    <title>Bulblos</title>
 
     <style>
         /* Center the Plotly chart */
@@ -140,7 +140,15 @@
                     return avgTempByLabel[label] / countByLabel[label];
                 });
 
-                var colors = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324'];
+                // Sort labels and avgTemperatures in ascending order based on avgTemperatures
+                var dataCombined = labels.map(function (_, i) {
+                    return { label: labels[i], avgTemperature: avgTemperatures[i] };
+                });
+                dataCombined.sort((a, b) => a.avgTemperature - b.avgTemperature);
+                labels = dataCombined.map(item => item.label);
+                avgTemperatures = dataCombined.map(item => item.avgTemperature);
+
+                var colors = '#5e7153';
 
                 var trace = {
                     x: labels,
@@ -164,6 +172,7 @@
         // Call updateChart initially to show default chart
         updateChart();
     </script>
+
 
 
     <!-- Placeholder for plant details -->
@@ -196,7 +205,7 @@
                     <td><a href="#">Plant Doctor</a></td>
                 </tr>
                 <tr>
-                    <td><a href="./gardening_vitals.html" class="active">Gardening Vitals</a></td>
+                    <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
                     <td><a href="#">Floral Arrangements</a></td>
                 </tr>
                 <tr>
