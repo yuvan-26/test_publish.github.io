@@ -113,65 +113,56 @@
     </div>
 
     <!-- JavaScript for Rendering Chart -->
-    <script>
-        function updateChart() {
-            var waterLevel = document.getElementById("water-level-dropdown").value;
-            Plotly.d3.csv('Gardening Crops.csv', function(data) {
-                var desiredLabels = ['Turmeric', 'Spinach', 'Beet', 'Chilli', 'Snake Gouard', 'Pepper', 'Cinnamon', 'Lime', 'Tomato', 'Sweet Potato', 'Ginger', 'Brinjals', 'Capsicum', 'Cucumber', 'Pumpkin', 'Orange'];
-                var filteredData = data.filter(function(row) {
-                    return desiredLabels.includes(row.Label) && row.Waterlevel === waterLevel;
-                });
-    
-                var avgTempByLabel = {};
-                var countByLabel = {};
-    
-                filteredData.forEach(function(row) {
-                    if (!avgTempByLabel[row.Label]) {
-                        avgTempByLabel[row.Label] = 0;
-                        countByLabel[row.Label] = 0;
-                    }
-                    avgTempByLabel[row.Label] += parseFloat(row.Temperature);
-                    countByLabel[row.Label]++;
-                });
-    
-                var labels = Object.keys(avgTempByLabel);
-                var avgTemperatures = labels.map(function(label) {
-                    return avgTempByLabel[label] / countByLabel[label];
-                });
-    
-                // Sort labels and avgTemperatures in ascending order based on avgTemperatures
-                var dataCombined = labels.map(function(_, i) {
-                    return { label: labels[i], avgTemperature: avgTemperatures[i] };
-                });
-                dataCombined.sort((a, b) => a.avgTemperature - b.avgTemperature);
-                labels = dataCombined.map(item => item.label);
-                avgTemperatures = dataCombined.map(item => item.avgTemperature);
-    
-                var colors = '#5e7153';
-    
-                var trace = {
-                    x: labels,
-                    y: avgTemperatures,
-                    type: 'bar',
-                    marker: {
-                        color: colors
-                    }
-                };
-    
-                var layout = {
-                    title: 'Average Temperature by Label for ' + waterLevel + ' Water Level',
-                    xaxis: { title: 'Label', tickfont: { family: 'Jost' } }, // Set font family for x-axis labels
-                    yaxis: { title: 'Average Temperature', tickfont: { family: 'Jost' } } // Set font family for y-axis labels
-                };
-    
-                Plotly.newPlot('plotly-chart', [trace], layout);
+<script>
+    function updateChart() {
+        var waterLevel = document.getElementById("water-level-dropdown").value;
+        Plotly.d3.csv('Gardening Crops.csv', function(data) {
+            var desiredLabels = ['Turmeric', 'Spinach', 'Beet', 'Chilli', 'Snake Gouard', 'Pepper', 'Cinnamon', 'Lime', 'Tomato', 'Sweet Potato', 'Ginger', 'Brinjals', 'Capsicum', 'Cucumber', 'Pumpkin', 'Orange'];
+            var filteredData = data.filter(function(row) {
+                return desiredLabels.includes(row.Label) && row.Waterlevel === waterLevel;
             });
-        }
-    
-        // Call updateChart initially to show default chart
-        updateChart();
-    </script>
-    
+
+            var avgTempByLabel = {};
+            var countByLabel = {};
+
+            filteredData.forEach(function(row) {
+                if (!avgTempByLabel[row.Label]) {
+                    avgTempByLabel[row.Label] = 0;
+                    countByLabel[row.Label] = 0;
+                }
+                avgTempByLabel[row.Label] += parseFloat(row.Temperature);
+                countByLabel[row.Label]++;
+            });
+
+            var labels = Object.keys(avgTempByLabel);
+            var avgTemperatures = labels.map(function(label) {
+                return avgTempByLabel[label] / countByLabel[label];
+            });
+
+            var colors = ['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324', '#9A6324'];
+
+            var trace = {
+                x: labels,
+                y: avgTemperatures,
+                type: 'bar',
+                marker: {
+                    color: colors
+                }
+            };
+
+            var layout = {
+                title: 'Average Temperature by Label for ' + waterLevel + ' Water Level',
+                xaxis: { title: 'Label', tickfont: { family: 'Jost' } }, // Set font family for x-axis labels
+                yaxis: { title: 'Average Temperature', tickfont: { family: 'Jost' } } // Set font family for y-axis labels
+            };
+
+            Plotly.newPlot('plotly-chart', [trace], layout);
+        });
+    }
+
+    // Call updateChart initially to show default chart
+    updateChart();
+</script>
 
 
     <!-- Placeholder for plant details -->
