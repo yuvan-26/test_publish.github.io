@@ -430,3 +430,155 @@ select#plantSelect::-ms-expand {
     width: auto;
     /* 自动调整宽度保持宽高比 */
 }
+
+/*modeling*/
+
+#wizard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 300px;
+    background: #5E7153;
+    border-radius: 60px;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    transition: background-color 0.3s;
+    box-shadow: 0 0 10px rgba(0,
+            0, 0, 0.3);
+}
+
+.step {
+    display: none;
+    margin-bottom: 1em;
+}
+
+.step.active {
+    display: block;
+}
+
+h2 {
+    color: #333;
+}
+
+.option-container {
+    margin-bottom: 1em;
+}
+
+.option {
+    display: inline-block;
+    cursor: pointer;
+
+    height: 50px;
+    width: 220px;
+
+
+    background-color: #fcfce4;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    color: #5E7153;
+    font-family: 'Jost';
+
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+.option:hover {
+    transform: scale(1.1);
+}
+
+.option.selected {
+    background-color: #a7aca8;
+}
+
+.nav {
+    display: inline-block;
+    cursor: pointer;
+
+    height: 50px;
+    width: 150px;
+
+    background-color: #fcfce4;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    color: #5E7153;
+    font-family: 'Jost';
+
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+.nav:hover {
+    transform: scale(1.1);
+}
+
+#results {
+    margin-top: 2em;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px 5px;
+    background: #e7e7e7;
+    border-radius: 7px;
+    width:
+        calc(25% - 20px);
+    /* Adjusted width to fit four cards in a row */
+    float: left;
+    box-sizing: border-box;
+    text-align: center;
+    transform: 0.3s;
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.image-container-modeling {
+    width: 150px;
+    /* 设置div的固定宽度 */
+    height: 130px;
+    /* 设置div的固定高度 */
+    display: flex;
+    /* 使用flex布局使图片居中 */
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 水平居中 */
+    overflow: hidden;
+    /* 超出部分隐藏 */
+    border-radius: 10px;
+}
+
+.plant-image-modeling {
+    width: 280px;
+    display: block;
+    margin-bottom: 10px;
+    transition: transform 0.4s;
+}
+
+.plant-image-modeling:hover {
+    transform: scale(1.5);
+}
