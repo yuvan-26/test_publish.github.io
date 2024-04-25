@@ -4,86 +4,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gardening Quiz</title>
+    <title>Gardening Details</title>
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
-    </style>
 </head>
 
-<body style="margin-top: 180px;">
-    <div style="min-height: 100%; display: flex; flex-direction: column;">
-        <!--Header-->
-        <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
-            <div
-                style="width: 100%; height: 130px; position: relative; background: #5e7153; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+<body style="margin-top: 150px;">
+    <!--Header-->
+    <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
+        <div class="header">
 
-                <!--Header logo-->
-                <div style="width: 40%;">
-                    <a href="./index.html">
-                        <image style="width: 25%;" src="./image/Logo.png">
-                    </a>
-                </div>
-
-                <!--Header menu-->
-                <div style="width: 60%;">
-                    <table class="header-menu">
-                        <tr>
-                            <td><a href="./index.html">Home</a></td>
-                            <td><a href="./plant_library.html">Plant Library</a></td>
-                            <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
-                            <td><a href="#">Gardening Module</a></td>
-                            <td><a href="./about_us.html">About Us</a></td>
-                        </tr>
-                    </table>
-                </div>
+            <!--Header logo-->
+            <div style="width: 40%;">
+                <a href="./index.html">
+                    <image style="width: 25%;" src="./image/Logo.png">
+                </a>
             </div>
-        </header>
 
-        <!--footer-->
-        <footer style="margin-top: auto;">
-            <div
-                style="display: flex; flex-direction: column; width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
-
-                <!--footer menu-->
-                <table class="footer-menu">
+            <!--Header menu-->
+            <div style="width: 60%;">
+                <table class="header-menu">
                     <tr>
                         <td><a href="./index.html">Home</a></td>
-                        <td><a href="#">Tools</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./about_us.html">About Us</a></td>
-                        <td><a href="#">AI Plant Identifier</a></td>
-                    </tr>
-                    <tr>
                         <td><a href="./plant_library.html">Plant Library</a></td>
-                        <td><a href="#">Plant Doctor</a></td>
-                    </tr>
-                    <tr>
                         <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
-                        <td><a href="#">Floral Arrangements</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">Gardening Module</a></td>
+                        <td><a href="./gardening_modeling.html" class="active">Gardening Module</a></td>
+                        <td><a href="./about_us.html">About Us</a></td>
                     </tr>
                 </table>
+            </div>
+        </div>
+    </header>
 
-                <!--Footer logo-->
-                <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
-                    <div style="position: relative; width: 50%; left:5%;">
-                        <span
-                            style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
-                        </span>
-                        <span
-                            style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
-                            Marshmallows 2024
-                        </span>
-                    </div>
+    <div id="plant-details">
+
+    </div>
+
+    <div>
+
+    </div>
+
+    <script>
+        // This function gets called when the window loads
+        window.onload = function () {
+            // Get the URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const botanicalName = params.get('botanicalName'); // Get the botanical name passed as a URL parameter
+
+            if (botanicalName) {
+                // If there's a botanical name, fetch and display the plant details
+                fetchAndDisplayPlantDetails(botanicalName);
+            } else {
+                // If there's no botanical name, display an error message
+                document.getElementById('plant-details').innerHTML = '<p>Error: No plant name provided.</p>';
+            }
+        }
+
+        function fetchAndDisplayPlantDetails(botanicalName) {
+            // Modify the URL to point to your API endpoint
+            const apiUrl = `https://render-api-2cxj.onrender.com/native_data`;
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Filter the data for the specific plant using botanicalName
+                    const plantDetails = data.find(plant => plant['Botanical Name'] === botanicalName);
+                    if (plantDetails) {
+                        // Display the details of the plant
+                        displayPlantDetails(plantDetails);
+                    } else {
+                        // If the plant is not found, display an error message
+                        document.getElementById('plant-details').innerHTML = `<p>Plant with botanical name ${botanicalName} not found.</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    document.getElementById('plant-details').innerHTML = `<p>Error fetching details for ${botanicalName}.</p>`;
+                });
+        }
+
+        function displayPlantDetails(plant) {
+            // Assume plant is the details object for the specific plant
+            // Update the HTML to display the details
+            const detailsElement = document.getElementById('plant-details');
+            detailsElement.innerHTML = `
+                    <di class="discription-box">
+                            <div class="image-container-quiz">
+                                <img class='plant-image-quiz' src="${plant['Image_Url']}" alt="Image of ${plant['Common Name']}">
+                            </div>
+                            <div style="width: 30%; display: flex; justify-content: center;flex-direction: column; padding: 20px; font-size: 25px; font-family: 'Jost'; color: white; font-weight: 200;">
+                                <div style="font-size: 30px; margin-bottom: 15px">${plant['Botanical Name']}</div>
+                                <div><strong>Common Name</strong>: ${plant['Common Name']}</div>
+                                <div><strong>Climate Zones</strong>: ${plant['Climate Zones']}</div>
+                                <div><strong>Light Needs</strong>: ${plant['Light Needs']}</div>
+                                <div><strong>Maintenance</strong>: ${plant['Maintenance']}</div>
+                                <div><strong>Plant Type</strong>: ${plant['Plant Type']}</div>
+                                <div><strong>Soil Type</strong>: ${plant['Soil Type']}</div>
+                                <div><strong>Soil Additional</strong>: ${plant['Soil Additional']}</div>
+                                <div><strong>Water Needs</strong>: ${plant['Water Needs']}</div>
+                            </div>
+                        </div>
+                `;
+        }
+    </script>
+    <!--footer-->
+    <footer>
+        <div
+            style="width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
+
+            <!--footer menu-->
+            <table class="footer-menu">
+                <tr>
+                    <td><a href="./index.html">Home</a></td>
+                    <td><a href="#">Tools</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./about_us.html">About Us</a></td>
+                    <td><a href="#">AI Plant Identifier</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./plant_library.html">Plant Library</a></td>
+                    <td><a href="#">Plant Doctor</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                    <td><a href="#">Floral Arrangements</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./gardening_modeling.html" class="active">Gardening Module</a></td>
+                </tr>
+            </table>
+
+            <!--Footer logo-->
+            <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
+                <div style="position: relative; width: 50%; left:5%;">
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
+                    </span>
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
+                        Marshmallows 2024
+                    </span>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
+</body>
+
+</html>

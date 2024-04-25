@@ -9,11 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="margin-top: 180px;">
     <!--Header-->
     <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
-        <div
-            style="width: 100%; height: 130px; position: relative; background: #5e7153; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+        <div class="header">
 
             <!--Header logo-->
             <div style="width: 40%;">
@@ -37,7 +36,21 @@
         </div>
     </header>
 
-    <div style="height:180px"></div>
+    <div
+        style="display: flex; position: relative; align-items: center; justify-content: center; width: 100%; height: 300px; background-image: url(./image/WhatsApp\ Image\ 2024-04-25\ at\ 22.33.39.jpeg); flex-direction: column;">
+        <div
+            style="text-align: center; align-content: center;color: white; font-size: 30px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; padding-left: 10%; padding-right: 5%;">
+            Our intuitive filtering options let you effortlessly sift through plants based on soil type, sun exposure
+            preferences,
+            and seasonal needs, ensuring you find your perfect green match.
+        </div>
+        <div
+            style="text-align: center; align-content: center;color: white; font-size: 35px; font-family: 'Jost'; font-style: italic; font-weight: 400; word-wrap: break-word; padding-left: 10%; padding-right: 5%; margin-top: 3%;">
+            Answer the question below and Bulblos will give you the perfect match!
+        </div>
+
+    </div>
+
     <div style="width: 100%; display: flex; position: relative; justify-content: center;">
         <div id="wizard">
             <!-- Step 1: Soil Type -->
@@ -56,7 +69,7 @@
                         onclick="selectOption('soilType', 'Sand,Loam,Clay')">Sand,Loam,Clay</button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
-                    <button style="margin-left: 18%;" class="nav" onclick="nextStep()">Next</button>
+                    <button style="margin-left: 18%;" class="button-next" onclick="nextStep()">Next</button>
                 </div>
             </div>
 
@@ -74,8 +87,8 @@
                         onclick="selectOption('sunlightExposure', 'Sun,Semi-shade')">Sun,Semi-shade</button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
-                    <button style="" class="nav" onclick="prevStep()">Previous</button>
-                    <button style="" class="nav" onclick="nextStep()">Next</button>
+                    <button class="button-previous" onclick="prevStep()">Previous</button>
+                    <button class="button-next" onclick="nextStep()">Next</button>
                 </div>
             </div>
 
@@ -92,8 +105,8 @@
                     <button class="option" value="High" onclick="selectOption('maintenance', 'High')">High</button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
-                    <button style="" class="nav" onclick="prevStep()">Previous</button>
-                    <button style="" class="nav" onclick="submitSelections()">Submit</button>
+                    <button class="button-previous" onclick="prevStep()">Previous</button>
+                    <button class="button-submit" onclick="submitSelections()">Submit</button>
                 </div>
             </div>
         </div>
@@ -219,13 +232,20 @@
                 let plantRows = '';
                 for (let i = 0; i < filteredPlants.length; i += rowSize) {
                     const plantRow = filteredPlants.slice(i, i + rowSize);
-                    const rowHtml = `<div class="plant-row">${plantRow.map(plant => `
-                        <div class="card">
-                            <div style="font-size: 25px; font-family: 'Jost'">${plant['Common Name']} </div>
-                            <div class="image-container-modeling">
-                                <img src="${plant['Image_Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
-                            </div>
-                        </div>`).join('')}</div>`;
+                    const rowHtml = `<div class="plant-card-box">${plantRow.map(plant => `
+                        <a href="./gardening_quiz.html?botanicalName=${encodeURIComponent(plant['Botanical Name'])}" >
+                            <div class="card">
+                                <div class="image-container-modeling">
+                                    <img src="${plant['Image_Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
+                                </div>
+                                <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 30%; background-color: #403323;">
+                                    <div style="width: 90%; font-size: 20px; font-family: 'Jost'; color: #FFFFFF; text-align: center;">
+                                        ${plant['Botanical Name']} 
+                                    </div>
+                                </div>
+                            </div>`).join('')}</div>
+                        <a>
+                            `;
                     plantRows += rowHtml;
                 }
                 resultsElement.innerHTML = plantRows;
