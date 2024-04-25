@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardening Model</title>
+    <link rel="stylesheet" href="test.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!--Header-->
+    <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
+        <div
+            style="width: 100%; height: 130px; position: relative; background: #5e7153; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+
+            <!--Header logo-->
+            <div style="width: 40%;">
+                <a href="./index.html">
+                    <image style="width: 25%;" src="./image/Logo.png">
+                </a>
+            </div>
+
+            <!--Header menu-->
+            <div style="width: 60%;">
+                <table class="header-menu">
+                    <tr>
+                        <td><a href="./index.html">Home</a></td>
+                        <td><a href="./plant_library.html">Plant Library</a></td>
+                        <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                        <td><a href="./gardening-modeling.html" class="active">Gardening Module</a></td>
+                        <td><a href="./about_us.html">About Us</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </header>
+
+    <div style="height:180px"></div>
+    <div style="width: 100%; display: flex; position: relative; justify-content: center;">
+        <div id="wizard">
+            <!-- Step 1: Soil Type -->
+            <div class="step active" id="step1">
+                <div
+                    style="width: 100%; text-align: center; color: #fcfce4; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-bottom: 30px;">
+                    Choose the type of soil currently present in your garden.
+                </div>
+                <div class="option-container" id="soilType">
+                    <button class="option" value="Loam" onclick="selectOption('soilType', 'Loam')">Loam</button>
+                    <button class="option" value="Loam,Clay"
+                        onclick="selectOption('soilType', 'Loam,Clay')">Loam,Clay</button>
+                    <button class="option" value="Sand,Loam"
+                        onclick="selectOption('soilType', 'Sand,Loam')">Sand,Loam</button>
+                    <button class="option" value="Sand,Loam,Clay"
+                        onclick="selectOption('soilType', 'Sand,Loam,Clay')">Sand,Loam,Clay</button>
+                </div>
+                <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
+                    <button style="margin-left: 18%;" class="nav" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Sunlight Exposure -->
+            <div class="step" id="step2">
+                <div
+                    style="width: 100%; text-align: center; color: #fcfce4; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-bottom: 30px;">
+                    Does your garden have low or high sunlight exposure?
+                </div>
+                <div class="option-container" id="sunlightExposure">
+                    <button class="option" value="Semi-shade"
+                        onclick="selectOption('sunlightExposure', 'Semi-shade')">Semi-shade</button>
+                    <button class="option" value="Sun" onclick="selectOption('sunlightExposure', 'Sun')">Sun</button>
+                    <button class="option" value="Sun,Semi-shade"
+                        onclick="selectOption('sunlightExposure', 'Sun,Semi-shade')">Sun,Semi-shade</button>
+                </div>
+                <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
+                    <button style="" class="nav" onclick="prevStep()">Previous</button>
+                    <button style="" class="nav" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Maintenance Level -->
+            <div class="step" id="step3">
+                <div
+                    style="width: 100%; text-align: center; color: #fcfce4; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-bottom: 30px;">
+                    Would you rather plant low, medium, or high maintenance plants?
+                </div>
+                <div class="option-container" id="maintenance">
+                    <button class="option" value="Low" onclick="selectOption('maintenance', 'Low')">Low</button>
+                    <button class="option" value="Medium"
+                        onclick="selectOption('maintenance', 'Medium')">Medium</button>
+                    <button class="option" value="High" onclick="selectOption('maintenance', 'High')">High</button>
+                </div>
+                <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
+                    <button style="" class="nav" onclick="prevStep()">Previous</button>
+                    <button style="" class="nav" onclick="submitSelections()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results"></div>
+
+    <!--footer-->
+    <footer>
+        <div
+            style="width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
+
+            <!--footer menu-->
+            <table class="footer-menu">
+                <tr>
+                    <td><a href="./index.html">Home</a></td>
+                    <td><a href="#">Tools</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./about_us.html">About Us</a></td>
+                    <td><a href="#">AI Plant Identifier</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./plant_library.html">Plant Library</a></td>
+                    <td><a href="#">Plant Doctor</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                    <td><a href="#">Floral Arrangements</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./gardening_modeling.html" class="active">Gardening Module</a></td>
+                </tr>
+            </table>
+
+            <!--Footer logo-->
+            <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
+                <div style="position: relative; width: 50%; left:5%;">
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
+                    </span>
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
+                        Marshmallows 2024
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        let selections = {
+            soilType: null,
+            sunlightExposure: null,
+            maintenance: null
+        };
+
+        function selectOption(optionType, value) {
+            selections[optionType] = value;
+            highlightSelected(optionType, value);
+        }
+
+        function highlightSelected(optionType, value) {
+            const options = document.querySelectorAll(`#${optionType} .option`);
+            options.forEach((option) => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`#${optionType} .option[value='${value}']`).classList.add('selected');
+        }
+
+        function nextStep() {
+            if (currentStep < 3) {
+                currentStep++;
+                updateStep();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStep();
+            }
+        }
+
+        function updateStep() {
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(step => step.classList.remove('active'));
+            steps[currentStep - 1].classList.add('active');
+        }
+
+        function submitSelections() {
+            if (selections.soilType && selections.sunlightExposure && selections.maintenance) {
+                filterPlants();
+            } else {
+                alert("Please select options for all questions.");
+            }
+        }
+
+        function filterPlants() {
+            const apiUrl = 'https://render-api-2cxj.onrender.com/native_data';
+            fetch(apiUrl, {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(data => displayResults(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function displayResults(data) {
+            const resultsElement = document.getElementById('results');
+            resultsElement.innerHTML = '';
+
+            const filteredPlants = data.filter(plant =>
+                (plant['Soil Type'].includes(selections.soilType) || !selections.soilType) &&
+                (plant['Light Needs'].includes(selections.sunlightExposure) || !selections.sunlightExposure) &&
+                (plant['Maintenance'].includes(selections.maintenance) || !selections.maintenance)
+            );
+
+            if (filteredPlants.length > 0) {
+                const rowSize = 4; // Number of plants per row
+                let plantRows = '';
+                for (let i = 0; i < filteredPlants.length; i += rowSize) {
+                    const plantRow = filteredPlants.slice(i, i + rowSize);
+                    const rowHtml = `<div class="plant-row">${plantRow.map(plant => `
+                        <div class="card">
+                            <div style="font-size: 25px; font-family: 'Jost'">${plant['Common Name']} </div>
+                            <div class="image-container-modeling">
+                                <img src="${plant['Image_Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
+                            </div>
+                        </div>`).join('')}</div>`;
+                    plantRows += rowHtml;
+                }
+                resultsElement.innerHTML = plantRows;
+            } else {
+                resultsElement.innerHTML = '<p>No plants suitable. Try other options.</p>';
+            }
+        }
+    </script>
+</body>
+
+</html>
