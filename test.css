@@ -35,6 +35,18 @@
 
 }
 
+.header {
+    width: 100%;
+    height: 130px;
+    position: relative;
+    background: #5e7153;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .header-menu>tbody>tr>td>a {
     text-align: left;
     color: #9abc70;
@@ -441,7 +453,7 @@ select#plantSelect::-ms-expand {
     height: 300px;
     background: #5E7153;
     border-radius: 60px;
-    margin-top: 80px;
+    margin-top: 50px;
     margin-bottom: 50px;
     transition: background-color 0.3s;
     box-shadow: 0 0 10px rgba(0,
@@ -499,19 +511,19 @@ h2 {
     background-color: #a7aca8;
 }
 
-.nav {
+.button-previous {
     display: inline-block;
     cursor: pointer;
 
     height: 50px;
     width: 150px;
 
-    background-color: #fcfce4;
+    background-color: #ae8b75;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
-    color: #5E7153;
+    color: #ffffff;
     font-family: 'Jost';
 
     margin: 4px 10px;
@@ -524,7 +536,66 @@ h2 {
             0, 0, 0.3);
 }
 
-.nav:hover {
+.button-previous:hover {
+    transform: scale(1.1);
+}
+
+.button-next {
+    display: inline-block;
+    cursor: pointer;
+
+    height: 50px;
+    width: 150px;
+
+    background-color: #ae8b75;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    color: #ffffff;
+    font-family: 'Jost';
+
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+.button-next:hover {
+    transform: scale(1.1);
+}
+
+.button-submit {
+    display: inline-block;
+    cursor: pointer;
+
+    height: 50px;
+    width: 150px;
+
+    background-color: #ae8b75;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 450;
+    color: #ffffff;
+    font-family: 'Jost';
+
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+.button-submit:hover {
     transform: scale(1.1);
 }
 
@@ -537,19 +608,22 @@ h2 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 20px;
+    padding: 0%;
     margin: 10px 5px;
     background: #e7e7e7;
-    border-radius: 7px;
-    width:
-        calc(25% - 20px);
+    border-radius: 15px;
+    width: 20%;
     /* Adjusted width to fit four cards in a row */
+
+    height: 300px;
     float: left;
     box-sizing: border-box;
     text-align: center;
     transform: 0.3s;
     box-shadow: 0 0 15px rgba(0,
-            0, 0, 0.3);
+            0, 0, 0.8);
+    overflow: hidden;
+    border-width: 0px;
 }
 
 .card:hover {
@@ -557,28 +631,70 @@ h2 {
 }
 
 .image-container-modeling {
-    width: 150px;
-    /* 设置div的固定宽度 */
-    height: 130px;
-    /* 设置div的固定高度 */
+    width: 100%;
+    height: 70%;
     display: flex;
-    /* 使用flex布局使图片居中 */
     align-items: center;
-    /* 垂直居中 */
     justify-content: center;
-    /* 水平居中 */
     overflow: hidden;
-    /* 超出部分隐藏 */
-    border-radius: 10px;
+    border-width: 0px;
+    padding: 0px;
 }
 
 .plant-image-modeling {
-    width: 280px;
+    width: 400px;
     display: block;
     margin-bottom: 10px;
     transition: transform 0.4s;
 }
 
 .plant-image-modeling:hover {
+    transform: scale(1.5);
+}
+
+.plant-card-box {
+    justify-content: center;
+    width: 80%;
+    padding-left: 16%;
+}
+
+/*quiz*/
+
+.image-container-quiz {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-width: 0px;
+    padding: 0px;
+}
+
+.discription-box {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    background: #783E19;
+    transition: background-color 0.3s;
+    flex-direction: row;
+    margin-bottom: 50px;
+    box-shadow: 0 0 20px rgba(0,
+            0, 0, 1);
+}
+
+.discription-box:hover {
+    background-color: #5f3114;
+}
+
+.plant-image-quiz {
+    width: 1200px;
+    display: block;
+    transition: transform 0.4s;
+}
+
+.plant-image-quiz:hover {
     transform: scale(1.5);
 }
