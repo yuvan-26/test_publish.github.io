@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gardening Details</title>
+    <title>Gardening Quiz</title>
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -36,33 +36,12 @@
         </div>
     </header>
 
-    <div id="plant-details">
 
-    </div>
-
-    <div
-        style="width: 100%; display: flex; justify-content: center; align-items: center; position: relative; flex-direction: column;">
-        <div
-            style="width: 70%; text-align: center; color: #403323; font-size: 35px; font-family: 'Jost'; font-weight: 500; word-wrap: break-word">
-            Wanna test your gardening knowledge?
-        </div>
-        <div
-            style="width: 70%; text-align: center; color: #2D2D2D; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-top: 3%;">
-            Try our interactive quiz now!
-        </div>
-        <div style="margin-top: 2%; margin-bottom: 5%;">
-            <button class="test-button" id="test-button" onclick="redirectToNextPage()">
-                Test Now!
-            </button>
-        </div>
-    </div>
 
     <script>
-        // This function gets called when the window loads
         window.onload = function () {
-            // Get the URL parameters
             const params = new URLSearchParams(window.location.search);
-            const botanicalName = params.get('botanicalName'); // Get the botanical name passed as a URL parameter
+            const botanicalName = params.get('botanicalName');
 
             if (botanicalName) {
                 fetchAndDisplayPlantDetails(botanicalName);
@@ -72,7 +51,7 @@
         }
 
         function fetchAndDisplayPlantDetails(botanicalName) {
-            const apiUrl = `https://render-api-2cxj.onrender.com/native_data`;
+            const apiUrl = `https://bulblos-native-plants-095940ab3763.herokuapp.com/api/quiz_native_plants`;
 
             fetch(apiUrl)
                 .then(response => {
@@ -123,15 +102,7 @@
                 `;
         }
 
-        function redirectToNextPage() {
-            const botanicalName = window.currentBotanicalName;
-            if (botanicalName) {
-                const nextSiteUrl = `./gardening_quiz2.html?botanicalName=${encodeURIComponent(botanicalName)}`;
-                window.location.href = nextSiteUrl;
-            } else {
-                alert('Botanical Name is not defined.');
-            }
-        }
+
     </script>
     <!--footer-->
     <footer>
