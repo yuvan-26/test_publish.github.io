@@ -720,3 +720,51 @@ h2 {
 .test-button:hover {
     transform: scale(1.1);
 }
+
+/*quiz*/
+
+.quiz-box {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #536449;
+    border-radius: 20px;
+    height: 350px;
+    flex-direction: column;
+    font-size: 23px;
+    color: #FFFFFF;
+    font-family: 'Jost';
+    /*animation: slideRightAnimation 2s ease-out;*/
+    box-shadow: 0 0 20px rgba(0,
+            0, 0, 1);
+}
+
+.quiz-button {
+    display: inline-block;
+    cursor: pointer;
+
+    height: 50px;
+    width: 150px;
+
+    background-color: #fcfce4;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    color: #5E7153;
+    font-family: 'Jost';
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.2s;
+
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+.quiz-button:hover {
+
+    transform: scale(1.1);
+}

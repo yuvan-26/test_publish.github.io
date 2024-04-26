@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="margin-top: 150px;">
+<body style="margin-top: 200px;">
     <!--Header-->
     <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
         <div class="header">
@@ -36,75 +36,7 @@
         </div>
     </header>
 
-
-
-    <script>
-        window.onload = function () {
-            const params = new URLSearchParams(window.location.search);
-            const botanicalName = params.get('botanicalName');
-
-            if (botanicalName) {
-                fetchAndDisplayPlantDetails(botanicalName);
-            } else {
-                document.getElementById('plant-details').innerHTML = '<p>Error: No plant name provided.</p>';
-            }
-        }
-
-        function fetchAndDisplayPlantDetails(botanicalName) {
-            const apiUrl = `https://bulblos-native-plants-095940ab3763.herokuapp.com/api/quiz_native_plants`;
-
-            fetch(apiUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Filter the data for the specific plant using botanicalName
-                    const plantDetails = data.find(plant => plant['Botanical Name'] === botanicalName);
-                    if (plantDetails) {
-                        displayPlantDetails(plantDetails);
-                    } else {
-                        document.getElementById('plant-details').innerHTML = `<p>Plant with botanical name ${botanicalName} not found.</p>`;
-                    }
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
-                    document.getElementById('plant-details').innerHTML = `<p>Error fetching details for ${botanicalName}.</p>`;
-                });
-        }
-
-        function displayPlantDetails(plant) {
-
-            window.currentBotanicalName = plant['Botanical Name']
-
-            document.getElementById('test-button').onclick = redirectToNextPage;
-
-            const detailsElement = document.getElementById('plant-details');
-            detailsElement.innerHTML = `
-                    <di class="discription-box">
-                            <div class="image-container-quiz">
-                                <img class='plant-image-quiz' src="${plant['Image_Url']}" alt="Image of ${plant['Common Name']}">
-                            </div>
-                            <div style="width: 30%; display: flex; justify-content: center;flex-direction: column; padding: 20px; font-size: 25px; font-family: 'Jost'; color: white; font-weight: 200;">
-                                <div style="font-size: 30px; margin-bottom: 15px">${plant['Botanical Name']}</div>
-                                <div><strong>Common Name</strong>: ${plant['Common Name']}</div>
-                                <div><strong>Climate Zones</strong>: ${plant['Climate Zones']}</div>
-                                <div><strong>Light Needs</strong>: ${plant['Light Needs']}</div>
-                                <div><strong>Maintenance</strong>: ${plant['Maintenance']}</div>
-                                <div><strong>Plant Type</strong>: ${plant['Plant Type']}</div>
-                                <div><strong>Soil Type</strong>: ${plant['Soil Type']}</div>
-                                <div><strong>Soil Additional</strong>: ${plant['Soil Additional']}</div>
-                                <div><strong>Water Needs</strong>: ${plant['Water Needs']}</div>
-                            </div>
-                        </div>
-                `;
-        }
-
-
-    </script>
-    <!--footer-->
+    <div id="quiz-questions"></div>
     <footer>
         <div
             style="width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
@@ -146,6 +78,108 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        window.onload = function () {
+            const params = new URLSearchParams(window.location.search);
+            const botanicalName = params.get('botanicalName');
+
+            if (botanicalName) {
+                fetchAndDisplayPlantDetails(botanicalName);
+                fetchQuizQuestions(botanicalName);
+            } else {
+                document.getElementById('plant-details').innerHTML = '<p>Error: No plant name provided.</p>';
+            }
+        }
+
+        function fetchQuizQuestions(botanicalName) {
+            const apiUrl = `https://bulblos-native-plants-095940ab3763.herokuapp.com/api/quiz_native_plants`;
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const plant = data.find(plant => plant['Botanical Name'] === botanicalName);
+                    if (plant) {
+                        displayQuizQuestions(plant.Questions);
+                    } else {
+                        throw new Error('Plant not found in the database');
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    document.getElementById('quiz-questions').innerHTML = `<p>Error fetching quiz questions for ${botanicalName}.</p>`;
+                });
+        }
+
+        function displayQuizQuestions(questions) {
+            const quizQuestionsElement = document.getElementById('quiz-questions');
+            quizQuestionsElement.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const quizQuestion = document.createElement('div');
+
+                if (index === 0) {
+                    quizQuestion.style.display = 'block';
+                } else {
+                    quizQuestion.style.display = 'none';
+                }
+
+                quizQuestion.innerHTML = `
+            <div style="font-size: 30px; font-family: 'Jost';">${question['question ' + (index + 1)]}</div>
+            <form style="font-size: 25px; font-family: 'Jost';"id="question-${index + 1}-form" data-correct-answer="${getCorrectAnswerIndex(question)}">
+                ${question.options.map((option, optionIndex) => `
+                    <label>
+                        <input type="radio" name="question-${index + 1}-option" value="${optionIndex}" required>
+                        ${option}
+                    </label><br>
+                `).join('')}
+            </form>
+            <button class="quiz-button" onclick="submitAnswer(${index + 1}, ${questions.length})">Submit Answer</button>
+            <p style="font-size: 25px; id="question-${index + 1}-result"></p>
+            <p style="font-size: 25px; id="question-${index + 1}-correct-answer" style="display: none;">Correct Answer: ${question.options[getCorrectAnswerIndex(question)]}</p>
+            <hr>
+        `;
+                quizQuestionsElement.appendChild(quizQuestion);
+            });
+        }
+
+        function getCorrectAnswerIndex(question) {
+            const correctAnswer = question.correct_answer;
+            return question.options.findIndex(option => option.includes(correctAnswer));
+        }
+
+
+        function submitAnswer(questionIndex, totalQuestions) {
+            const form = document.getElementById(`question-${questionIndex}-form`);
+            const selectedOption = form.elements[`question-${questionIndex}-option`].value;
+            const correctAnswer = parseInt(form.getAttribute('data-correct-answer'));
+
+            const resultElement = document.getElementById(`question-${questionIndex}-result`);
+            const correctAnswerElement = document.getElementById(`question-${questionIndex}-correct-answer`);
+
+            if (parseInt(selectedOption) === correctAnswer) {
+                resultElement.textContent = 'Correct!';
+            } else {
+                resultElement.textContent = 'Incorrect!';
+                correctAnswerElement.style.display = 'block';
+            }
+
+            if (questionIndex < totalQuestions) {
+                const nextQuestion = document.getElementById(`question-${questionIndex + 1}-form`).parentNode;
+                nextQuestion.style.display = 'block';
+            }
+        }
+
+
+
+        function fetchAndDisplayPlantDetails(botanicalName) {
+            // Fetch plant details similar to gardening_quiz.html
+        }
+    </script>
 </body>
 
 </html>
