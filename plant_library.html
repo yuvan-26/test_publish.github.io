@@ -12,6 +12,59 @@
         body {
             height: 100%;
         }
+
+        .plant-card {
+            width: calc(25% - 20px);
+            height: 300px;
+            /* Set a standard height for the cards */
+            margin: 10px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            /* Hide overflowing content */
+        }
+
+        .plant-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 60%;
+            /* Adjust the height of the image */
+            object-fit: cover;
+            /* Maintain aspect ratio and cover the area */
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-name {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Added styles for the heading */
+        .common-plants-heading {
+            text-align: center;
+            color: #403323;
+            font-size: 24px;
+            font-family: 'Jost';
+            font-style: italic;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        /* Added styles for the container */
+        #commonPlantsContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -22,24 +75,28 @@
             <div class="header">
 
                 <!--Header logo-->
-                <div style="width: 40%;">
-                    <a href="./index.html">
-                        <image style="width: 25%;" src="./image/Logo.png">
-                    </a>
+                <div
+                    style="display: flex; width: 10%; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                    <div style="height:70%; text-align: center;">
+                        <a href="./index.html">
+                            <image style="width: 80%;" src="./image/Logo.png">
+                        </a>
+                    </div>
+                    <div
+                        style="height: 30%; text-align: center; color:#403323; font-weight: 500; font-size: 20px; font-family: 'Jost';">
+                        Bulblos
+                    </div>
                 </div>
 
                 <!--Header menu-->
-                <div style="width: 60%;">
-                    <table class="header-menu">
-                        <tr>
-                            <td><a href="./index.html">Home</a></td>
-                            <td><a href="./plant_library.html" class="active">Plant Library</a></td>
-                            <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
-                            <td><a href="./gardening_modeling.html">Gardening Module</a></td>
-                            <td><a href="./about_us.html">About Us</a></td>
-                        </tr>
-                    </table>
+                <div class="header-menu" style="width: 85%;">
+                    <div><a href="./index.html">Home</a></div>
+                    <div><a href="./plant_library.html" class="active">Plant Library</a></div>
+                    <div><a href="./gardening_vitals.html">Gardening Vitals</a></div>
+                    <div><a href="./plant_filter.html">Plant Filter</a></div>
+                    <div><a href="./about_us.html">About Us</a></div>
                 </div>
+
             </div>
         </header>
 
@@ -52,14 +109,23 @@
             Unearth the hidden gems of Victoria's native flora in our vibrant Plant Library.</div>
         <div style="width: 100%; position: relative; align-items: center; margin-left: 30px;">
             <div style="position: relative; align-items: center; justify-content: center; width: 100%;">
-                <select id="plantSelect" onchange="displayPlantDetails()">
+                <select id="plantSelect" onchange="onDropdownChange()">
                     <option value="" class="default-option" selected>Select a Common Name</option>
                 </select>
+
 
                 <div id="plantDetails">
                     <!-- Placeholder for plant details -->
                 </div>
             </div>
+        </div>
+
+        <!-- Common Plants Section -->
+        <div style="margin-top: 20px;">
+            <!-- Heading for common plants -->
+            <h2 class="common-plants-heading">Common Plants</h2>
+            <!-- Container for common plants cards -->
+            <div id="commonPlantsContainer"></div>
         </div>
 
         <script>
@@ -87,6 +153,9 @@
                             option.textContent = item['Common Name'];
                             plantSelect.appendChild(option); // Append option to select element
                         });
+
+                        // Display common plant cards
+                        displayCommonPlants();
                     } else {
                         throw new Error('No data received');
                     }
@@ -96,50 +165,83 @@
                 }
             }
 
-            // Call fetchPlantData function when the page loads
-            window.onload = fetchPlantData;
-
             // Function to display plant details
-            function displayPlantDetails() {
-                const selectedCommonName = document.getElementById('plantSelect').value;
+            function displayPlantDetails(plantData) {
                 const plantDetailsContainer = document.getElementById('plantDetails');
 
-                // Check if a common name is selected
-                if (selectedCommonName) {
-                    // Find the plant data corresponding to the selected common name
-                    const selectedPlant = parsed.find(plant => plant['Common Name'] === selectedCommonName);
-
+                if (plantData) {
                     // Display the details in the plantDetailsContainer
-                    if (selectedPlant) {
-                        plantDetailsContainer.innerHTML = `
-                        <div class="select-plant-box">
-                            <div style="width: 40%; display: flex; justify-content: center; align-items: center; position: relative; flex-direction: column;">
-                                <div style="width: 70%; text-align: center; color: #fcfce4; font-size: 35px; font-family: 'Jost'; font-weight: 500; word-wrap: break-word; margin-bottom: 3%;">
-                                    ${selectedPlant['Common Name']}
-                                </div>
-                                <div class="image-container">
-                                    <img src="${selectedPlant['Image Url']}" alt="${selectedPlant['Common Name']} Image" class="plant-image">
-                                </div>
-                            </div>
-                            <div style="width: 60%; display: flex; justify-content: center; align-items: center;flex-direction: column; padding: 20px">
-                                <div><strong>Botanical Name</strong>: ${selectedPlant['Botanical Name']}</div>
-                                <div><strong>Plant Type</strong>: ${selectedPlant['Plant Type']}</div>
-                                <div><strong>Water Needs</strong>: ${selectedPlant['Water Needs']}</div>
-                                <div><strong>Maintenance</strong>: ${selectedPlant['Maintenance']}</div>
-                                <div><strong>Climate Zones</strong>: ${selectedPlant['Climate Zones']}</div>
-                                <div><strong>Abcission</strong>: ${selectedPlant['Abcission']}</div>
-                                <div><strong>Height Ranges</strong>: ${selectedPlant['Height Ranges']}</div>
-                            </div>
-                        </div>
-                        
-                    `;
-                    } else {
-                        plantDetailsContainer.innerHTML = '<p>No details found for the selected plant</p>';
-                    }
+                    plantDetailsContainer.innerHTML = `
+            <div class="select-plant-box">
+                <div style="width: 40%; display: flex; justify-content: center; align-items: center; position: relative; flex-direction: column;">
+                    <div style="width: 70%; text-align: center; color: #fcfce4; font-size: 35px; font-family: 'Jost'; font-weight: 500; word-wrap: break-word; margin-bottom: 3%;">
+                        ${plantData['Common Name']}
+                    </div>
+                    <div class="image-container">
+                        <img src="${plantData['Image Url']}" alt="${plantData['Common Name']} Image" class="plant-image">
+                    </div>
+                </div>
+                <div style="width: 60%; display: flex; justify-content: center; align-items: center;flex-direction: column; padding: 20px">
+                    <div><strong>Botanical Name</strong>: ${plantData['Botanical Name']}</div>
+                    <div><strong>Plant Type</strong>: ${plantData['Plant Type']}</div>
+                    <div><strong>Water Needs</strong>: ${plantData['Water Needs']}</div>
+                    <div><strong>Maintenance</strong>: ${plantData['Maintenance']}</div>
+                    <div><strong>Climate Zones</strong>: ${plantData['Climate Zones']}</div>
+                    <div><strong>Abcission</strong>: ${plantData['Abcission']}</div>
+                    <div><strong>Height Ranges</strong>: ${plantData['Height Ranges']}</div>
+                </div>
+            </div>
+        `;
                 } else {
-                    plantDetailsContainer.innerHTML = '<p>Select a common name to view details</p>';
+                    plantDetailsContainer.innerHTML = '<p>Select a plant to view details</p>';
                 }
             }
+
+
+            // Function to handle dropdown change event
+            function onDropdownChange() {
+                const selectedCommonName = document.getElementById('plantSelect').value;
+                const selectedPlant = parsed.find(plant => plant['Common Name'] === selectedCommonName);
+                displayPlantDetails(selectedPlant);
+            }
+            // Function to handle card click event
+            function onCardClick(plant) {
+                displayPlantDetails(plant);
+            }
+
+
+
+            // Function to display common plant cards
+            function displayCommonPlants() {
+                const commonPlantsContainer = document.getElementById('commonPlantsContainer');
+
+                // Shuffle the array of plants
+                const shuffledPlants = parsed.slice().sort(() => Math.random() - 0.5);
+
+                // Take the first 8 plants
+                const commonPlants = shuffledPlants.slice(0, 8);
+
+                // Clear previous cards
+                commonPlantsContainer.innerHTML = '';
+
+                // Create and append cards for each common plant
+                commonPlants.forEach(plant => {
+                    const card = document.createElement('div');
+                    card.classList.add('plant-card');
+                    card.innerHTML = `
+            <img src="${plant['Image Url']}" alt="${plant['Common Name']} Image" class="card-image">
+            <div class="card-name">${plant['Common Name']}</div>
+        `;
+                    card.addEventListener('click', () => {
+                        // Call the onCardClick function with the plant object when the card is clicked
+                        onCardClick(plant);
+                    });
+                    commonPlantsContainer.appendChild(card);
+                });
+            }
+
+            // Call fetchPlantData function when the page loads
+            window.onload = fetchPlantData;
         </script>
         <!--footer-->
         <footer style="margin-top: auto;">
