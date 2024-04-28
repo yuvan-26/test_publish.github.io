@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gardening Quiz</title>
+    <title>Plant Quiz</title>
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -15,23 +15,26 @@
         <div class="header">
 
             <!--Header logo-->
-            <div style="width: 40%;">
-                <a href="./index.html">
-                    <image style="width: 25%;" src="./image/Logo.png">
-                </a>
+            <div
+                style="display: flex; width: 10%; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                <div style="height:70%; text-align: center;">
+                    <a href="./index.html">
+                        <image style="width: 80%;" src="./image/Logo.png">
+                    </a>
+                </div>
+                <div
+                    style="height: 30%; text-align: center; color:#403323; font-weight: 500; font-size: 20px; font-family: 'Jost';">
+                    Bulblos
+                </div>
             </div>
 
             <!--Header menu-->
-            <div style="width: 60%;">
-                <table class="header-menu">
-                    <tr>
-                        <td><a href="./index.html">Home</a></td>
-                        <td><a href="./plant_library.html">Plant Library</a></td>
-                        <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
-                        <td><a href="./gardening_modeling.html" class="active">Gardening Module</a></td>
-                        <td><a href="./about_us.html">About Us</a></td>
-                    </tr>
-                </table>
+            <div class="header-menu" style="width: 85%;">
+                <div><a href="./index.html">Home</a></div>
+                <div><a href="./plant_library.html">Plant Library</a></div>
+                <div><a href="./gardening_vitals.html">Gardening Vitals</a></div>
+                <div><a href="./plant_filter.html" class="active">Plant Filter</a></div>
+                <div><a href="./about_us.html">About Us</a></div>
             </div>
         </div>
     </header>

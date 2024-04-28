@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gardening Model</title>
+    <title>Plant Filter</title>
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -15,24 +15,28 @@
         <div class="header">
 
             <!--Header logo-->
-            <div style="width: 40%;">
-                <a href="./index.html">
-                    <image style="width: 25%;" src="./image/Logo.png">
-                </a>
+            <div
+                style="display: flex; width: 10%; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
+                <div style="height:70%; text-align: center;">
+                    <a href="./index.html">
+                        <image style="width: 80%;" src="./image/Logo.png">
+                    </a>
+                </div>
+                <div
+                    style="height: 30%; text-align: center; color:#403323; font-weight: 500; font-size: 20px; font-family: 'Jost';">
+                    Bulblos
+                </div>
             </div>
 
             <!--Header menu-->
-            <div style="width: 60%;">
-                <table class="header-menu">
-                    <tr>
-                        <td><a href="./index.html">Home</a></td>
-                        <td><a href="./plant_library.html">Plant Library</a></td>
-                        <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
-                        <td><a href="./gardening_modeling.html" class="active">Gardening Module</a></td>
-                        <td><a href="./about_us.html">About Us</a></td>
-                    </tr>
-                </table>
+            <div class="header-menu" style="width: 85%;">
+                <div><a href="./index.html">Home</a></div>
+                <div><a href="./plant_library.html">Plant Library</a></div>
+                <div><a href="./gardening_vitals.html">Gardening Vitals</a></div>
+                <div><a href="./plant_filter.html" class="active">Plant Filter</a></div>
+                <div><a href="./about_us.html">About Us</a></div>
             </div>
+
         </div>
     </header>
 
@@ -57,16 +61,33 @@
             <div class="step active" id="step1">
                 <div
                     style="width: 100%; text-align: center; color: #fcfce4; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-bottom: 30px;">
-                    Choose the type of soil currently present in your garden.
+                    What type of soil do you have in your garden?
                 </div>
                 <div class="option-container" id="soilType">
-                    <button class="option" value="Loam" onclick="selectOption('soilType', 'Loam')">Loam</button>
-                    <button class="option" value="Loam,Clay"
-                        onclick="selectOption('soilType', 'Loam,Clay')">Loam,Clay</button>
-                    <button class="option" value="Sand,Loam"
-                        onclick="selectOption('soilType', 'Sand,Loam')">Sand,Loam</button>
-                    <button class="option" value="Sand,Loam,Clay"
-                        onclick="selectOption('soilType', 'Sand,Loam,Clay')">Sand,Loam,Clay</button>
+                    <button class="option" value="Loam" onclick="selectOption('soilType', 'Loam')">
+                        Loam
+                        <span class="bubble">
+                            Ideal for gardening, a balanced mix of sand, silt, and clay.
+                        </span>
+                    </button>
+                    <button id="loam-clay" class="option" value="Loam,Clay"
+                        onclick="selectOption('soilType', 'Loam,Clay')">Loam,Clay
+                        <span class="bubble">
+                            Mostly loam with added clay; good nutrient retention but may be heavy.
+                        </span>
+                    </button>
+                    <button id="sand-loam" class="option" value="Sand,Loam"
+                        onclick="selectOption('soilType', 'Sand,Loam')">Sand,Loam
+                        <span class="bubble">
+                            Predominantly loam with some sand; good drainage and nutrient retention.
+                        </span>
+                    </button>
+                    <button id="sand-loam-clay" class="option" value="Sand,Loam,Clay"
+                        onclick="selectOption('soilType', 'Sand,Loam,Clay')">Sand,Loam,Clay
+                        <span class="bubble">
+                            Mix of sand, loam, and clay; diverse properties, suitable for various plants.
+                        </span>
+                    </button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
                     <button style="margin-left: 18%;" class="button-next" onclick="nextStep()">Next</button>
@@ -77,14 +98,26 @@
             <div class="step" id="step2">
                 <div
                     style="width: 100%; text-align: center; color: #fcfce4; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-bottom: 30px;">
-                    Does your garden have low or high sunlight exposure?
+                    Is your garden mostly in shade or sunlight?
                 </div>
                 <div class="option-container" id="sunlightExposure">
                     <button class="option" value="Semi-shade"
-                        onclick="selectOption('sunlightExposure', 'Semi-shade')">Semi-shade</button>
-                    <button class="option" value="Sun" onclick="selectOption('sunlightExposure', 'Sun')">Sun</button>
+                        onclick="selectOption('sunlightExposure', 'Semi-shade')">Semi-shade
+                        <span class="bubble">
+                            Some shade, but also receives some sunlight during the day.
+                        </span>
+                    </button>
+                    <button class="option" value="Sun" onclick="selectOption('sunlightExposure', 'Sun')">Sun
+                        <span class="bubble">
+                            Direct sunlight for most of the day.
+                        </span>
+                    </button>
                     <button class="option" value="Sun,Semi-shade"
-                        onclick="selectOption('sunlightExposure', 'Sun,Semi-shade')">Sun,Semi-shade</button>
+                        onclick="selectOption('sunlightExposure', 'Sun,Semi-shade')">Sun,Semi-shade
+                        <span class="bubble">
+                            Mix of both direct sunlight and some shade.
+                        </span>
+                    </button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
                     <button class="button-previous" onclick="prevStep()">Previous</button>
@@ -96,13 +129,24 @@
             <div class="step" id="step3">
                 <div
                     style="width: 100%; text-align: center; color: #fcfce4; font-size: 25px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; margin-bottom: 30px;">
-                    Would you rather plant low, medium, or high maintenance plants?
+                    Which level of plant maintenance suits you best?
                 </div>
                 <div class="option-container" id="maintenance">
-                    <button class="option" value="Low" onclick="selectOption('maintenance', 'Low')">Low</button>
-                    <button class="option" value="Medium"
-                        onclick="selectOption('maintenance', 'Medium')">Medium</button>
-                    <button class="option" value="High" onclick="selectOption('maintenance', 'High')">High</button>
+                    <button class="option" value="Low" onclick="selectOption('maintenance', 'Low')">Low
+                        <span class="bubble">
+                            Plants that require minimal care and attention.
+                        </span>
+                    </button>
+                    <button class="option" value="Medium" onclick="selectOption('maintenance', 'Medium')">Medium
+                        <span class="bubble">
+                            Plants that need some regular care and occasional attention.
+                        </span>
+                    </button>
+                    <button class="option" value="High" onclick="selectOption('maintenance', 'High')">High
+                        <span class="bubble">
+                            Plants that need some regular care and occasional attention.
+                        </span>
+                    </button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
                     <button class="button-previous" onclick="prevStep()">Previous</button>
@@ -233,7 +277,7 @@
                 for (let i = 0; i < filteredPlants.length; i += rowSize) {
                     const plantRow = filteredPlants.slice(i, i + rowSize);
                     const rowHtml = `<div class="plant-card-box">${plantRow.map(plant => `
-                        <a href="./gardening_quiz.html?botanicalName=${encodeURIComponent(plant['Botanical Name'])}" >
+                        <a href="./plant_info.html?botanicalName=${encodeURIComponent(plant['Botanical Name'])}" >
                             <div class="card">
                                 <div class="image-container-modeling">
                                     <img src="${plant['Image_Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
@@ -254,7 +298,6 @@
             }
         }
     </script>
-    <script src="gardening_quiz.js"></script>
 </body>
 
 </html>
