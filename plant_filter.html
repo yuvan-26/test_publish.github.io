@@ -150,13 +150,17 @@
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
                     <button class="button-previous" onclick="prevStep()">Previous</button>
-                    <button class="button-submit" onclick="submitSelections()">Submit</button>
+                    <button class="button-submit" onclick="submitSelections()">
+                        Submit
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Results -->
+    <div id="information-tips"></div>
+
     <div id="results"></div>
 
     <!--footer-->
@@ -265,38 +269,58 @@
             const resultsElement = document.getElementById('results');
             resultsElement.innerHTML = '';
 
+            const tipsElement = document.getElementById('information-tips');
+            tipsElement.innerHTML = '<div id="tipsElement" style="text-align: center; font-size: 26px; width: 70%; padding-left: 15%; padding-right: 15%; font-family: Jost;">Here are some plants perfect for your garden, considering your selected soil, sunlight, and maintenance preferences. Take a look and see which ones you like best!</div>';
+            document.getElementById('tipsElement').scrollIntoView({ behavior: 'smooth' });
+
+            let currentPage = 0;
+            const plantsPerPage = 8; // Number of plants per page
+
             const filteredPlants = data.filter(plant =>
                 (plant['Soil Type'].includes(selections.soilType) || !selections.soilType) &&
                 (plant['Light Needs'].includes(selections.sunlightExposure) || !selections.sunlightExposure) &&
                 (plant['Maintenance'].includes(selections.maintenance) || !selections.maintenance)
             );
 
-            if (filteredPlants.length > 0) {
-                const rowSize = 4; // Number of plants per row
-                let plantRows = '';
-                for (let i = 0; i < filteredPlants.length; i += rowSize) {
-                    const plantRow = filteredPlants.slice(i, i + rowSize);
-                    const rowHtml = `<div class="plant-card-box">${plantRow.map(plant => `
-                        <a href="./plant_info.html?botanicalName=${encodeURIComponent(plant['Botanical Name'])}" >
-                            <div class="card">
-                                <div class="image-container-modeling">
-                                    <img src="${plant['Image_Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
-                                </div>
-                                <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 30%; background-color: #403323;">
-                                    <div style="width: 90%; font-size: 20px; font-family: 'Jost'; color: #FFFFFF; text-align: center;">
-                                        ${plant['Botanical Name']} 
-                                    </div>
-                                </div>
-                            </div>`).join('')}</div>
-                        <a>
-                            `;
-                    plantRows += rowHtml;
+            function renderPage() {
+                if (filteredPlants.length > 0) {
+                    const pagePlants = filteredPlants.slice(currentPage * plantsPerPage, (currentPage + 1) * plantsPerPage);
+                    const plantCards = pagePlants.map(plant => `
+                <a href="./plant_info.html?botanicalName=${encodeURIComponent(plant['Botanical Name'])}">
+                    <div class="card">
+                        <div class="image-container-modeling">
+                            <img src="${plant['Image_Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
+                        </div>
+                        <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 30%; background-color: #403323;">
+                            <div style="width: 90%; font-size: 20px; font-family: 'Jost'; color: #FFFFFF; text-align: center;">
+                                ${plant['Botanical Name']}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+
+                    resultsElement.innerHTML = `<div class="plant-card-box">${plantCards}</div>
+                                        <div style="text-align:center; margin-top: 20px;">
+                                            <button class="card-nav" onclick="navigate(-1)" ${currentPage === 0 ? 'disabled' : ''}>Previous page</button>
+                                            <button class="card-nav" onclick="navigate(1)" ${currentPage * plantsPerPage + pagePlants.length >= filteredPlants.length ? 'disabled' : ''}>Next page</button>
+                                        </div>`;
+                } else {
+                    resultsElement.innerHTML = '<div id="tipsElement" style="text-align: center; font-size: 26px; width: 70%; padding-left: 15%; padding-right: 15%; font-family: Jost;">No plants suitable. Try other options.</div>';
+
                 }
-                resultsElement.innerHTML = plantRows;
-            } else {
-                resultsElement.innerHTML = '<p>No plants suitable. Try other options.</p>';
             }
+
+            function navigate(direction) {
+                currentPage += direction;
+                renderPage();
+            }
+
+            window.navigate = navigate;
+            renderPage();
         }
+
+
     </script>
 </body>
 
