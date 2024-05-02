@@ -9,21 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         .plant-card {
-            width: calc(25% - 20px);
-            height: 300px;
-            /* Set a standard height for the cards */
-            margin: 10px;
-            cursor: pointer;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-            overflow: hidden;
-            /* Hide overflowing content */
+            width: 30%;
         }
 
-        .plant-card:hover {
-            transform: translateY(-5px);
-        }
 
         .card-image {
             width: 100%;
@@ -56,6 +44,9 @@
 
         /* Added styles for the container */
         #commonPlantsContainer {
+            width: 70%;
+            padding-left: 15%;
+            padding-right: 15%;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -214,7 +205,7 @@
             const shuffledPlants = parsed.slice().sort(() => Math.random() - 0.5);
 
             // Take the first 8 plants
-            const commonPlants = shuffledPlants.slice(0, 8);
+            const commonPlants = shuffledPlants.slice(0, 6);
 
             // Clear previous cards
             commonPlantsContainer.innerHTML = '';
@@ -224,8 +215,17 @@
                 const card = document.createElement('div');
                 card.classList.add('plant-card');
                 card.innerHTML = `
-            <img src="${plant['Image Url']}" alt="${plant['Common Name']} Image" class="card-image">
-            <div class="card-name">${plant['Common Name']}</div>
+            
+            <div class="library-card">
+                        <div class="image-container-modeling">
+                            <img src="${plant['Image Url']}" alt="${plant['Common Name']} Image" class="plant-image-modeling">
+                        </div>
+                        <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 30%; background-color: #403323;">
+                            <div style="width: 90%; font-size: 20px; font-family: 'Jost'; color: #FFFFFF; text-align: center;">
+                                ${plant['Common Name']}
+                            </div>
+                        </div>
+                    </div>
         `;
                 card.addEventListener('click', () => {
                     // Call the onCardClick function with the plant object when the card is clicked

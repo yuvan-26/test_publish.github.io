@@ -12,6 +12,16 @@
 
 <body style="margin-top: 145px;">
 
+    <script>
+        var password = prompt("Please enter the password:");
+
+        // Check if the entered password matches
+        if (password !== "TP23") { // Change "TP23" to your desired password
+            alert("Incorrect password. Access denied.");
+            window.location.href = "https://example.com"; // Redirect to another page
+        }
+    </script>
+
     <!--Header-->
     <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
         <div class="header">

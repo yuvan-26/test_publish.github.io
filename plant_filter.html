@@ -90,7 +90,7 @@
                     </button>
                 </div>
                 <div style="display: flex; width: 100%; margin-top: 2%; justify-content: center;">
-                    <button style="margin-left: 18%;" class="button-next" onclick="nextStep()">Next</button>
+                    <button class="button-next" onclick="nextStep()">Next</button>
                 </div>
             </div>
 
@@ -300,10 +300,15 @@
                 </a>
             `).join('');
 
-                    resultsElement.innerHTML = `<div class="plant-card-box">${plantCards}</div>
-                                        <div style="text-align:center; margin-top: 20px;">
-                                            <button class="card-nav" onclick="navigate(-1)" ${currentPage === 0 ? 'disabled' : ''}>Previous page</button>
-                                            <button class="card-nav" onclick="navigate(1)" ${currentPage * plantsPerPage + pagePlants.length >= filteredPlants.length ? 'disabled' : ''}>Next page</button>
+                    resultsElement.innerHTML = `
+                                        <div style ="position: relative; display: flex; width: 90%; height: 100%; justify-content: center; align-items: center; padding-left: 10%">
+                                            <div style="position: relative;">
+                                                ${plantCards}
+                                            </div>
+                                        </div>
+                                        <div style="text-align:center; position: relative;">
+                                            <button class="card-nav" onclick="navigate(-1)" ${currentPage === 0 ? 'disabled style="background-color: #ccc; cursor: not-allowed;"' : ''}>Previous page</button>
+                                            <button class="card-nav" onclick="navigate(1)" ${currentPage * plantsPerPage + pagePlants.length >= filteredPlants.length ? 'disabled style="background-color: #ccc; cursor: not-allowed;"' : ''}>Next page</button>
                                         </div>`;
                 } else {
                     resultsElement.innerHTML = '<div id="tipsElement" style="text-align: center; font-size: 26px; width: 70%; padding-left: 15%; padding-right: 15%; font-family: Jost;">No plants suitable. Try other options.</div>';
