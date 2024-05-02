@@ -7,13 +7,87 @@
     <title>Plant Quiz</title>
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional CSS for card styling */
+        .quiz-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border: 1px solid #967d0f;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #d9e3d9e8;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 3px solid black;
+        }
+
+        .quiz-question {
+            font-size: 28px;
+            font-family: 'Jost', sans-serif;
+            margin-bottom: 10px;
+            text-align: center;
+            /* Center align the questions */
+            background-color: #d9e3d9e8;
+            /* Green background color for questions */
+            padding: 10px;
+            /* Add padding to questions */
+            border-radius: 10px;
+            /* Add border radius to questions */
+            margin-left: 20%;
+            /* Move questions 20% away from the left */
+            margin-right: 20%;
+            /* Move questions 20% away from the right */
+        }
+
+        .quiz-option {
+            display: block;
+            font-size: 20px;
+            font-family: "Jost";
+            margin-bottom: 10px;
+        }
+
+
+        .quiz-result {
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+            /* Center align the result */
+        }
+
+        .correct-answer {
+            color: #bd8632;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+            /* Center align the correct answer */
+        }
+
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        #quiz-result-message {
+            font-weight: bold;
+            margin: 30px;
+            text-align: center;
+            font-size: 28px;
+            color: #557d24;
+            background-color: #bed1a7;
+            padding: 30px;
+            height: 80px;
+        }
+    </style>
 </head>
 
 <body style="margin-top: 200px;">
     <!--Header-->
     <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
         <div class="header">
-
             <!--Header logo-->
             <div
                 style="display: flex; width: 10%; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
@@ -27,7 +101,6 @@
                     Bulblos
                 </div>
             </div>
-
             <!--Header menu-->
             <div class="header-menu" style="width: 85%;">
                 <div><a href="./index.html">Home</a></div>
@@ -39,11 +112,11 @@
         </div>
     </header>
 
-    <div id="quiz-questions"></div>
+    <div id="quiz-questions" style="text-align: center;"></div>
+    <div id="quiz-result-message"></div>
     <footer>
         <div
             style="width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
-
             <!--footer menu-->
             <table class="footer-menu">
                 <tr>
@@ -66,17 +139,14 @@
                     <td><a href="./gardening_modeling.html" class="active">Gardening Module</a></td>
                 </tr>
             </table>
-
             <!--Footer logo-->
             <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
                 <div style="position: relative; width: 50%; left:5%;">
                     <span
-                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
-                    </span>
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos</span>
                     <span
                         style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
-                        Marshmallows 2024
-                    </span>
+                        Marshmallows 2024</span>
                 </div>
             </div>
         </div>
@@ -91,7 +161,7 @@
                 fetchAndDisplayPlantDetails(botanicalName);
                 fetchQuizQuestions(botanicalName);
             } else {
-                document.getElementById('plant-details').innerHTML = '<p>Error: No plant name provided.</p>';
+                document.getElementById('quiz-questions').innerHTML = '<p>Error: No plant name provided.</p>';
             }
         }
 
@@ -124,6 +194,7 @@
 
             questions.forEach((question, index) => {
                 const quizQuestion = document.createElement('div');
+                quizQuestion.classList.add('quiz-card');
 
                 if (index === 0) {
                     quizQuestion.style.display = 'block';
@@ -132,20 +203,20 @@
                 }
 
                 quizQuestion.innerHTML = `
-            <div style="font-size: 30px; font-family: 'Jost';">${question['question ' + (index + 1)]}</div>
-            <form id="question-${index + 1}-form" data-correct-answer="${getCorrectAnswerIndex(question)}">
-                ${question.options.map((option, optionIndex) => `
-                    <label>
-                        <input type="radio" name="question-${index + 1}-option" value="${optionIndex}" required>
-                        ${option}
-                    </label><br>
-                `).join('')}
-            </form>
-            <button class="quiz-button" onclick="submitAnswer(${index + 1}, ${questions.length})">Submit Answer</button>
-            <p  id="question-${index + 1}-result"></p>
-            <p  id="question-${index + 1}-correct-answer" style="display: none;">Correct Answer: ${question.options[getCorrectAnswerIndex(question)]}</p>
-            <hr>
-        `;
+                    <div class="quiz-question">${question['question ' + (index + 1)]}</div>
+                    <form style= "width: 30%; padding-left: 45%; text-align: left;"id="question-${index + 1}-form" data-correct-answer="${getCorrectAnswerIndex(question)}">
+                        ${question.options.map((option, optionIndex) => `
+                            <label class="quiz-option">
+                                <input type="radio" name="question-${index + 1}-option" value="${optionIndex}" required>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </form>
+                    <button class="plant-doctor-button" style="font-size: 20px; font-family:'Jost';" onclick="submitAnswer(${index + 1}, ${questions.length})">Submit Answer</button>
+                    <p class="quiz-result" id="question-${index + 1}-result"></p>
+                    <p class="correct-answer" id="question-${index + 1}-correct-answer" style="display: none;">Correct Answer: <span class="correct-answer-text">${question.options[getCorrectAnswerIndex(question)]}</span></p>
+                    <hr>
+                `;
                 quizQuestionsElement.appendChild(quizQuestion);
             });
         }
@@ -155,7 +226,6 @@
             return question.options.findIndex(option => option.includes(correctAnswer));
         }
 
-
         function submitAnswer(questionIndex, totalQuestions) {
             const form = document.getElementById(`question-${questionIndex}-form`);
             const selectedOption = form.elements[`question-${questionIndex}-option`].value;
@@ -163,6 +233,7 @@
 
             const resultElement = document.getElementById(`question-${questionIndex}-result`);
             const correctAnswerElement = document.getElementById(`question-${questionIndex}-correct-answer`);
+            const correctAnswerText = correctAnswerElement.querySelector('.correct-answer-text'); // Select the correct answer text span
 
             if (parseInt(selectedOption) === correctAnswer) {
                 resultElement.textContent = 'Correct!';
@@ -175,8 +246,32 @@
                 const nextQuestion = document.getElementById(`question-${questionIndex + 1}-form`).parentNode;
                 nextQuestion.style.display = 'block';
             }
-        }
 
+            // Calculate the number of correct answers so far
+            let correctAnswers = 0;
+            document.querySelectorAll('.quiz-result').forEach(result => {
+                if (result.textContent === 'Correct!') {
+                    correctAnswers++;
+                }
+            });
+            const percentage = (correctAnswers / totalQuestions) * 100;
+            // Display appropriate message based on the percentage
+            let message;
+            if (questionIndex === totalQuestions) {
+                if (percentage === 100) {
+                    message = `Well done! You got 100% correct! 🎉 Your knowledge is impressive!`;
+                } else if (percentage === 75) {
+                    message = `Great job! You answered 3 out of 4 questions correctly! 👏 Keep up the good work!`;
+                } else if (percentage === 50) {
+                    message = `Nice effort! You got 2 out of 4 questions right! 🌟 Keep learning and improving!`;
+                } else if (percentage === 25) {
+                    message = `Nice effort! You got 1 out of 4 questions right! 🌟 Keep learning and improving!`;
+                } else if (percentage === 0) {
+                    message = `Don't worry! Review the content and try again. I believe you can do better next time! 💪 Keep going!`;
+                }
+                document.getElementById('quiz-result-message').textContent = message;
+            }
+        }
 
 
         function fetchAndDisplayPlantDetails(botanicalName) {
