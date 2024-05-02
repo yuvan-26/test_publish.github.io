@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="test.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        html,
-        body {
-            height: 100%;
-        }
-
         .plant-card {
             width: calc(25% - 20px);
             height: 300px;
@@ -101,7 +96,7 @@
         </header>
 
         <div
-            style="display: flex; position: relative; align-items: center; justify-content: center; width: 100%; height: 300px; background-image: url(./image/WhatsApp\ Image\ 2024-04-25\ at\ 22.36.24.jpeg); flex-direction: column;">
+            style="display: flex; position: relative; align-items: center; justify-content: center; width: 100%; height: 300px; background-image: url(./image/WhatsApp\ Image\ 2024-04-25\ at\ 22.36.24.jpeg); flex-direction: column; margin-bottom: 5%;">
             <div
                 style="text-align: center; align-content: center;color: white; font-size: 30px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; padding-left: 10%; padding-right: 5%;">
                 Let's embark on a botanical adventure and celebrate Australia's natural heritage. Explore a world where
@@ -109,71 +104,68 @@
                 a story, from majestic gum trees to delicate wildflowers painting the landscape with vibrant hues.
             </div>
         </div>
-        <div style="width: 100%; position: relative; align-items: center; margin-left: 30px;">
-            <div style="position: relative; align-items: center; justify-content: center; width: 100%;">
-                <select id="plantSelect" onchange="onDropdownChange()">
-                    <option value="" class="default-option" selected>Select a Common Name</option>
-                </select>
-
-
-                <div id="plantDetails">
-                    <!-- Placeholder for plant details -->
-                </div>
-            </div>
+        <div style="display: flex;width: 100%; position: relative; align-items: center; justify-content: center;">
+            <select id="plantSelect" onchange="onDropdownChange()">
+                <option value="" class="default-option" selected>Select a Common Name</option>
+            </select>
         </div>
+    </div>
 
-        <!-- Common Plants Section -->
-        <div style="margin-top: 20px;">
-            <!-- Heading for common plants -->
-            <h2 class="common-plants-heading">Common Plants</h2>
-            <!-- Container for common plants cards -->
-            <div id="commonPlantsContainer"></div>
-        </div>
+    <div id="plantDetails"></div>
 
-        <script>
-            // Declare the parsed variable outside the fetchPlantData function
-            let parsed;
+    <!-- Common Plants Section -->
+    <div style="margin-top: 20px;">
+        <!-- Heading for common plants -->
+        <h2 class="common-plants-heading">Common Plants</h2>
+        <!-- Container for common plants cards -->
+        <div id="commonPlantsContainer"></div>
+    </div>
 
-            // Function to fetch plant data from the backend API
-            async function fetchPlantData() {
-                try {
-                    const response = await fetch('https://render-api-2cxj.onrender.com/plant_data');
-                    const data = await response.json();
+    <script>
+        // Declare the parsed variable outside the fetchPlantData function
+        let parsed;
 
-                    console.log(typeof data); // Check the type of data
-                    parsed = JSON.parse(data); // Assign data to the parsed variable
+        // Function to fetch plant data from the backend API
+        async function fetchPlantData() {
+            try {
+                const response = await fetch('https://render-api-2cxj.onrender.com/plant_data');
+                const data = await response.json();
 
-                    // Check if data is an array
-                    if (Array.isArray(parsed)) {
-                        // Clear previous options
-                        const plantSelect = document.getElementById('plantSelect');
-                        plantSelect.innerHTML = '<option value="" class="default-option" selected>Select a Common Name</option>'; // Add default option
-                        // Populate dropdown with common names
-                        parsed.forEach(item => {
-                            const option = document.createElement('option');
-                            option.value = item['Common Name'];
-                            option.textContent = item['Common Name'];
-                            plantSelect.appendChild(option); // Append option to select element
-                        });
+                console.log(typeof data); // Check the type of data
+                parsed = JSON.parse(data); // Assign data to the parsed variable
 
-                        // Display common plant cards
-                        displayCommonPlants();
-                    } else {
-                        throw new Error('No data received');
-                    }
-                } catch (error) {
-                    console.error('Error fetching plant data:', error.message);
-                    document.getElementById('plantSelect').innerHTML = '<option value="" class="default-option" selected>Error fetching data</option>';
+                // Check if data is an array
+                if (Array.isArray(parsed)) {
+                    // Clear previous options
+                    const plantSelect = document.getElementById('plantSelect');
+                    plantSelect.innerHTML = '<option value="" class="default-option" selected>Select a Common Name</option>'; // Add default option
+                    // Populate dropdown with common names
+                    parsed.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item['Common Name'];
+                        option.textContent = item['Common Name'];
+                        plantSelect.appendChild(option); // Append option to select element
+                    });
+
+                    // Display common plant cards
+                    displayCommonPlants();
+                } else {
+                    throw new Error('No data received');
                 }
+            } catch (error) {
+                console.error('Error fetching plant data:', error.message);
+                document.getElementById('plantSelect').innerHTML = '<option value="" class="default-option" selected>Error fetching data</option>';
             }
+        }
 
-            // Function to display plant details
-            function displayPlantDetails(plantData) {
-                const plantDetailsContainer = document.getElementById('plantDetails');
+        // Function to display plant details
+        function displayPlantDetails(plantData) {
+            const plantDetailsContainer = document.getElementById('plantDetails');
 
-                if (plantData) {
-                    // Display the details in the plantDetailsContainer
-                    plantDetailsContainer.innerHTML = `
+            if (plantData) {
+                // Display the details in the plantDetailsContainer
+                plantDetailsContainer.innerHTML = `
+            <div class="select-plant-container">
             <div class="select-plant-box">
                 <div style="width: 40%; display: flex; justify-content: center; align-items: center; position: relative; flex-direction: column;">
                     <div style="width: 70%; text-align: center; color: #fcfce4; font-size: 35px; font-family: 'Jost'; font-weight: 500; word-wrap: break-word; margin-bottom: 3%;">
@@ -193,100 +185,101 @@
                     <div><strong>Height Ranges</strong>: ${plantData['Height Ranges']}</div>
                 </div>
             </div>
+            </div>
         `;
-                } else {
-                    plantDetailsContainer.innerHTML = '<p>Select a plant to view details</p>';
-                }
+            } else {
+                plantDetailsContainer.innerHTML = '<p>Select a plant to view details</p>';
             }
+        }
 
 
-            // Function to handle dropdown change event
-            function onDropdownChange() {
-                const selectedCommonName = document.getElementById('plantSelect').value;
-                const selectedPlant = parsed.find(plant => plant['Common Name'] === selectedCommonName);
-                displayPlantDetails(selectedPlant);
-            }
-            // Function to handle card click event
-            function onCardClick(plant) {
-                displayPlantDetails(plant);
-            }
+        // Function to handle dropdown change event
+        function onDropdownChange() {
+            const selectedCommonName = document.getElementById('plantSelect').value;
+            const selectedPlant = parsed.find(plant => plant['Common Name'] === selectedCommonName);
+            displayPlantDetails(selectedPlant);
+        }
+        // Function to handle card click event
+        function onCardClick(plant) {
+            displayPlantDetails(plant);
+        }
 
 
 
-            // Function to display common plant cards
-            function displayCommonPlants() {
-                const commonPlantsContainer = document.getElementById('commonPlantsContainer');
+        // Function to display common plant cards
+        function displayCommonPlants() {
+            const commonPlantsContainer = document.getElementById('commonPlantsContainer');
 
-                // Shuffle the array of plants
-                const shuffledPlants = parsed.slice().sort(() => Math.random() - 0.5);
+            // Shuffle the array of plants
+            const shuffledPlants = parsed.slice().sort(() => Math.random() - 0.5);
 
-                // Take the first 8 plants
-                const commonPlants = shuffledPlants.slice(0, 8);
+            // Take the first 8 plants
+            const commonPlants = shuffledPlants.slice(0, 8);
 
-                // Clear previous cards
-                commonPlantsContainer.innerHTML = '';
+            // Clear previous cards
+            commonPlantsContainer.innerHTML = '';
 
-                // Create and append cards for each common plant
-                commonPlants.forEach(plant => {
-                    const card = document.createElement('div');
-                    card.classList.add('plant-card');
-                    card.innerHTML = `
+            // Create and append cards for each common plant
+            commonPlants.forEach(plant => {
+                const card = document.createElement('div');
+                card.classList.add('plant-card');
+                card.innerHTML = `
             <img src="${plant['Image Url']}" alt="${plant['Common Name']} Image" class="card-image">
             <div class="card-name">${plant['Common Name']}</div>
         `;
-                    card.addEventListener('click', () => {
-                        // Call the onCardClick function with the plant object when the card is clicked
-                        onCardClick(plant);
-                    });
-                    commonPlantsContainer.appendChild(card);
+                card.addEventListener('click', () => {
+                    // Call the onCardClick function with the plant object when the card is clicked
+                    onCardClick(plant);
                 });
-            }
+                commonPlantsContainer.appendChild(card);
+            });
+        }
 
-            // Call fetchPlantData function when the page loads
-            window.onload = fetchPlantData;
-        </script>
-        <!--footer-->
-        <footer style="margin-top: auto;">
-            <div
-                style="display: flex; flex-direction: column; width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
+        // Call fetchPlantData function when the page loads
+        window.onload = fetchPlantData;
+    </script>
+    <!--footer-->
+    <footer style="margin-top: auto;">
+        <div
+            style="display: flex; flex-direction: column; width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
 
-                <!--footer menu-->
-                <table class="footer-menu">
-                    <tr>
-                        <td><a href="./index.html">Home</a></td>
-                        <td><a href="#">Tools</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./about_us.html">About Us</a></td>
-                        <td><a href="#">AI Plant Identifier</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./plant_library.html" class="active">Plant Library</a></td>
-                        <td><a href="#">Plant Doctor</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
-                        <td><a href="#">Floral Arrangements</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="./gardening_modeling.html">Gardening Module</a></td>
-                    </tr>
-                </table>
+            <!--footer menu-->
+            <table class="footer-menu">
+                <tr>
+                    <td><a href="./index.html">Home</a></td>
+                    <td><a href="#">Tools</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./about_us.html">About Us</a></td>
+                    <td><a href="#">AI Plant Identifier</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./plant_library.html" class="active">Plant Library</a></td>
+                    <td><a href="#">Plant Doctor</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./gardening_vitals.html">Gardening Vitals</a></td>
+                    <td><a href="#">Floral Arrangements</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./gardening_modeling.html">Gardening Module</a></td>
+                </tr>
+            </table>
 
-                <!--Footer logo-->
-                <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
-                    <div style="position: relative; width: 50%; left:5%;">
-                        <span
-                            style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
-                        </span>
-                        <span
-                            style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
-                            Marshmallows 2024
-                        </span>
-                    </div>
+            <!--Footer logo-->
+            <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
+                <div style="position: relative; width: 50%; left:5%;">
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
+                    </span>
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
+                        Marshmallows 2024
+                    </span>
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
     </div>
 </body>
 
