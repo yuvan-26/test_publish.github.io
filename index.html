@@ -13,12 +13,15 @@
 <body style="margin-top: 145px;">
 
     <script>
-        var password = prompt("Please enter the password:");
+        if (!localStorage.getItem('passwordVerified')) {
+            var password = prompt("Please enter the password:");
 
-        // Check if the entered password matches
-        if (password !== "TP23") { // Change "TP23" to your desired password
-            alert("Incorrect password. Access denied.");
-            window.location.href = "https://example.com"; // Redirect to another page
+            if (password !== "TP23") {
+                alert("Incorrect password. Access denied.");
+                window.location.href = "https://example.com"; // Redirect to another page
+            } else {
+                localStorage.setItem('passwordVerified', 'true');
+            }
         }
     </script>
 
@@ -45,7 +48,7 @@
                 <div><a href="./index.html" class="active">Home</a></div>
                 <div><a href="./plant_library.html">Plant Library</a></div>
                 <div><a href="./gardening_vitals.html">Gardening Vitals</a></div>
-                <div><a href="./plant_filter.html">Plant Filter</a></div>
+                <div><a href="./plant_advisor.html">Plant Advisor</a></div>
                 <div><a href="./about_us.html">About Us</a></div>
             </div>
 
@@ -223,7 +226,7 @@
                     <td><a href="#">Floral Arrangements</a></td>
                 </tr>
                 <tr>
-                    <td><a href="./gardening_modeling.html">Gardening Module</a></td>
+                    <td><a href="./plant_advisor.html">Plant Advisor</a></td>
                 </tr>
             </table>
 
