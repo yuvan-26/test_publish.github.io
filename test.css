@@ -335,6 +335,7 @@
     transition: background-color 0.3s;
     flex-direction: row;
     animation: slideRightAnimation 2s ease-out;
+    margin-top: 50px;
     margin-bottom: 50px;
 }
 
