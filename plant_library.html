@@ -37,8 +37,7 @@
             color: #403323;
             font-size: 24px;
             font-family: 'Jost';
-            font-style: italic;
-            font-weight: 400;
+            font-weight: 700;
             margin-top: 20px;
         }
 
@@ -86,7 +85,7 @@
             </div>
         </header>
 
-        <div
+        <div id="library-tips"
             style="display: flex; position: relative; align-items: center; justify-content: center; width: 100%; height: 300px; background-image: url(./image/WhatsApp\ Image\ 2024-04-25\ at\ 22.36.24.jpeg); flex-direction: column; margin-bottom: 5%;">
             <div
                 style="text-align: center; align-content: center;color: white; font-size: 30px; font-family: 'Jost'; font-weight: 300; word-wrap: break-word; padding-left: 10%; padding-right: 5%;">
@@ -94,6 +93,7 @@
                 each plant tells
                 a story, from majestic gum trees to delicate wildflowers painting the landscape with vibrant hues.
             </div>
+            <div id="library-tips-sight"></div>
         </div>
         <div style="display: flex;width: 100%; position: relative; align-items: center; justify-content: center;">
             <select id="plantSelect" onchange="onDropdownChange()">
@@ -101,7 +101,6 @@
             </select>
         </div>
     </div>
-
     <div id="plantDetails"></div>
 
     <!-- Common Plants Section -->
@@ -151,6 +150,8 @@
 
         // Function to display plant details
         function displayPlantDetails(plantData) {
+            document.getElementById('library-tips-sight').scrollIntoView({ behavior: 'smooth' });
+
             const plantDetailsContainer = document.getElementById('plantDetails');
 
             if (plantData) {
@@ -193,6 +194,7 @@
         // Function to handle card click event
         function onCardClick(plant) {
             displayPlantDetails(plant);
+            document.getElementById('library-tips-sight').scrollIntoView({ behavior: 'smooth' });
         }
 
 
