@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div style="font-size: 30px; font-weight: 400px; margin-bottom: 20px">${disease.Disease_name}</div>
                                     <div><strong>Description:</strong> ${disease.Description}</div>
                                     <div><strong>Causes:</strong> ${disease.Causes}</div>
-                                    <div><strong>Symptoms:</strong> ${disease.Symptoms}</div>
-                                    <div><strong>Management Tips:</strong> ${disease.Management_tips}</div>
+                                    <div><strong>Symptoms:</strong> <br>${disease.Symptoms}</div>
+                                    <div><strong>Management Tips:</strong> <br>${disease.Management_tips}</div>
                                 </div>
                                 <div style="width: 40%;">
                                 <div style="overflow: hidden; width: 350px; height: 350px">
