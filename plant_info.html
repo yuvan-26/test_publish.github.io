@@ -10,37 +10,46 @@
 </head>
 
 <body style="margin-top: 150px;">
-    <!--Header-->
-    <header style="width: 100%; z-index: 1000; position: fixed; top: 0;">
-        <div class="header">
+    <!--footer-->
+    <footer>
+        <div
+            style="width: 90%; height: 350px; position: relative; background: #783E19; border-top-right-radius: 140px; overflow: hidden">
 
-            <!--Header logo-->
-            <div
-                style="display: flex; width: 10%; height: 100%; justify-content: center; align-items: center; flex-direction: column;">
-                <div style="height:70%; text-align: center;">
-                    <a href="./index.html">
-                        <image style="width: 80%;" src="./image/Logo.png">
-                    </a>
-                </div>
-                <div
-                    style="height: 30%; text-align: center; color:#403323; font-weight: 500; font-size: 20px; font-family: 'Jost';">
-                    Bulblos
+            <!--footer menu-->
+            <table class="footer-menu">
+                <tr>
+                    <td><a href="./index.html">Home</a></td>
+                    <td><a href="./plant_disease_hub.html">Plant Disease Hub</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./about_us.html">About Us</a></td>
+                    <td><a href="./plant_identifier.html">Plant Identifier</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./plant_library.html">Plant Library</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./plant_doctor.html">Plant Doctor</a></td>
+                </tr>
+                <tr>
+                    <td><a href="./plant_advisor.html" class="active">Plant Advisor</a></td>
+                </tr>
+            </table>
+
+            <!--Footer logo-->
+            <div style="display: flex; width: 100%; position: relative; margin-top: 3%;">
+                <div style="position: relative; width: 50%; left:5%;">
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 500; word-wrap: break-word">Bulblos
+                    </span>
+                    <span
+                        style="color: white; font-size:23px; font-family:'Jost'; font-weight: 400; word-wrap: break-word">©
+                        Marshmallows 2024
+                    </span>
                 </div>
             </div>
-
-            <!--Header menu-->
-            <div class="header-menu" style="width: 85%;">
-                <div><a href="./index.html">Home</a></div>
-                <div><a href="./plant_library.html">Plant Library</a></div>
-                <div><a href="./plant_advisor.html" class="active">Plant Advisor</a></div>
-                <div><a href="./plant_identifier.html">Plant Identifier</a></div>
-                <div><a href="./plant_doctor.html">Plant Doctor</a></div>
-                <div><a href="./plant_disease_hub.html">Plant Disease Hub</a></div>
-                <div><a href="./about_us.html">About Us</a></div>
-            </div>
-
         </div>
-    </header>
+    </footer>
 
     <div id="plant-details">
 
