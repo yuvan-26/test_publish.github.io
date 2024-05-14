@@ -278,15 +278,15 @@
             let message;
             if (questionIndex === totalQuestions) {
                 if (percentage === 100) {
-                    message = `Well done! You got 100% correct! 🎉 Your knowledge is impressive!`;
+                    message = `Well done! You got 100% correct, your knowledge is impressive.`;
                 } else if (percentage === 75) {
-                    message = `Great job! You answered 3 out of 4 questions correctly! 👏 Keep up the good work!`;
+                    message = `Good job! You answered 3 out of 4 questions correctly. Keep up the good work`;
                 } else if (percentage === 50) {
-                    message = `Nice effort! You got 2 out of 4 questions right! 🌟 Keep learning and improving!`;
+                    message = `Nice effort! You got 2 out of 4 questions right. Keep learning and improving`;
                 } else if (percentage === 25) {
-                    message = `Nice effort! You got 1 out of 4 questions right! 🌟 Keep learning and improving!`;
+                    message = `Nice effort! You got 1 out of 4 questions right. Keep learning and improving`;
                 } else if (percentage === 0) {
-                    message = `Don't worry! Review the content and try again. I believe you can do better next time! 💪 Keep going!`;
+                    message = `Don't worry! Review the content and try again. You can do better next time`;
                 }
                 document.getElementById('quiz-result-message').textContent = message;
             }
