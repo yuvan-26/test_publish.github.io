@@ -1,0 +1,42 @@
+.plant-card {
+    width: 30%;
+}
+
+
+.card-image {
+    width: 100%;
+    height: 60%;
+    /* Adjust the height of the image */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the area */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-name {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Added styles for the heading */
+.common-plants-heading {
+    text-align: center;
+    color: #403323;
+    font-size: 24px;
+    font-family: 'Jost';
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+/* Added styles for the container */
+#commonPlantsContainer {
+    width: 70%;
+    padding-left: 15%;
+    padding-right: 15%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

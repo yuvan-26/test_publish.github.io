@@ -6,51 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Library</title>
     <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="plant_library.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        .plant-card {
-            width: 30%;
-        }
-
-
-        .card-image {
-            width: 100%;
-            height: 60%;
-            /* Adjust the height of the image */
-            object-fit: cover;
-            /* Maintain aspect ratio and cover the area */
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
-        .card-name {
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* Added styles for the heading */
-        .common-plants-heading {
-            text-align: center;
-            color: #403323;
-            font-size: 24px;
-            font-family: 'Jost';
-            font-weight: 700;
-            margin-top: 20px;
-        }
-
-        /* Added styles for the container */
-        #commonPlantsContainer {
-            width: 70%;
-            padding-left: 15%;
-            padding-right: 15%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-    </style>
 </head>
 
 <body style="margin-top: 180px;">
@@ -103,7 +61,7 @@
             </select>
         </div>
     </div>
-    <div id="plantDetails"></div>
+    <div id="plantDetails" style="margin-top: 100px;"></div>
 
     <!-- Common Plants Section -->
     <div style="margin-top: 20px;">
@@ -111,6 +69,14 @@
         <h2 class="common-plants-heading">Common Plants</h2>
         <!-- Container for common plants cards -->
         <div id="commonPlantsContainer"></div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
+        <a href="./plant_advisor.html">
+            <button id="jumpBtn">
+                Explore Personalized Plant Suggestions
+            </button>
+        </a>
     </div>
 
     <script>
@@ -159,27 +125,29 @@
             if (plantData) {
                 // Display the details in the plantDetailsContainer
                 plantDetailsContainer.innerHTML = `
-            <div class="select-plant-container">
-            <div class="select-plant-box">
-                <div style="width: 40%; display: flex; justify-content: center; align-items: center; position: relative; flex-direction: column;">
-                    <div style="width: 70%; text-align: center; color: #fcfce4; font-size: 35px; font-family: 'Jost'; font-weight: 500; word-wrap: break-word; margin-bottom: 3%;">
-                        ${plantData['Common Name']}
+                <div style="display:flex; width=100%;justify-content: center;">
+                <div style="display: flex; font-family: 'Jost'; width:60%; border: 1px solid #ccc; border-radius: 10px; padding: 20px; height: 300px">
+                    <div style="width: 40%; gap: 30px;">
+                        <div style="font-family: 'Jost'; font-Size: 24px;">
+                            ${plantData['Common Name']}
+                        </div>
+                        <div style="overflow: hidden; width: 350px; height: 350px">
+                            <div class= "image-container">
+                            <img src="${plantData['Image Url']}" alt="${plantData['Common Name']} Image" class="plant-image">
+                            </div>
+                        </div>
                     </div>
-                    <div class="image-container">
-                        <img src="${plantData['Image Url']}" alt="${plantData['Common Name']} Image" class="plant-image">
+                    <div style="width: 55%; gap: 30px; padding: 20px;">                   
+                        <div><strong>Botanical Name</strong>: ${plantData['Botanical Name']}</div>
+                        <div><strong>Plant Type</strong>: ${plantData['Plant Type']}</div>
+                        <div><strong>Water Needs</strong>: ${plantData['Water Needs']}</div>
+                        <div><strong>Maintenance</strong>: ${plantData['Maintenance']}</div>
+                        <div><strong>Climate Zones</strong>: ${plantData['Climate Zones']}</div>
+                        <div><strong>Abcission</strong>: ${plantData['Abcission']}</div>
+                        <div><strong>Height Ranges</strong>: ${plantData['Height Ranges']}</div>
                     </div>
                 </div>
-                <div style="width: 60%; display: flex; justify-content: center; align-items: center;flex-direction: column; padding: 20px">
-                    <div><strong>Botanical Name</strong>: ${plantData['Botanical Name']}</div>
-                    <div><strong>Plant Type</strong>: ${plantData['Plant Type']}</div>
-                    <div><strong>Water Needs</strong>: ${plantData['Water Needs']}</div>
-                    <div><strong>Maintenance</strong>: ${plantData['Maintenance']}</div>
-                    <div><strong>Climate Zones</strong>: ${plantData['Climate Zones']}</div>
-                    <div><strong>Abcission</strong>: ${plantData['Abcission']}</div>
-                    <div><strong>Height Ranges</strong>: ${plantData['Height Ranges']}</div>
                 </div>
-            </div>
-            </div>
         `;
             } else {
                 plantDetailsContainer.innerHTML = '<p>Select a plant to view details</p>';

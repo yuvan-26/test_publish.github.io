@@ -1,3 +1,28 @@
+#jumpBtn {
+    width: 40%;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #5D7714;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    color: #ffffff;
+    font-family: 'Jost';
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 13px;
+    transition: transform 0.2s;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.3);
+}
+
+#jumpBtn:hover {
+    transform: scale(1.1);
+}
+
 /*footer menu*/
 .footer-menu {
     width: 35%;
@@ -444,7 +469,7 @@ select#plantSelect::-ms-expand {
 }
 
 .image-container {
-    width: 350px;
+    width: 250px;
     /* 设置div的固定宽度 */
     height: 250px;
     /* 设置div的固定高度 */
@@ -456,7 +481,7 @@ select#plantSelect::-ms-expand {
     /* 水平居中 */
     overflow: hidden;
     /* 超出部分隐藏 */
-    border-radius: 40px;
+    border-radius: 10px;
 }
 
 .image-container img {

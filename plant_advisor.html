@@ -164,6 +164,8 @@
 
     <div id="results"></div>
 
+    <div id="advisor-jumpBtn"></div>
+
     <!--footer-->
     <footer>
         <div
@@ -282,6 +284,21 @@
 
             const tipsElement = document.getElementById('information-tips');
             tipsElement.innerHTML = '<div id="tipsElement" style="text-align: center; font-size: 26px; width: 70%; padding-left: 15%; padding-right: 15%; font-family: Jost;">Here are some plants perfect for your garden, considering your selected soil, sunlight, and maintenance preferences. Take a look and see which ones you like best!</div>';
+
+            const jumpBtn = document.getElementById('advisor-jumpBtn')
+            jumpBtn.innerHTML = `
+                                <div style="text-align: center; font-size: 25px; font-family: 'Jost'; margin-top: 50px;">
+                                    Want to learn about a plant, but don't know its name? Discover with our Plant Identifier.
+                                </div>
+                                <div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
+                                    <a href="./plant_identifier.html">
+                                        <button id="jumpBtn">
+                                            Identify Unknown Plants Now!
+                                        </button>
+                                    </a>
+                                </div>
+                                `
+
             document.getElementById('tipsElement').scrollIntoView({ behavior: 'smooth' });
 
             let currentPage = 0;
