@@ -108,7 +108,7 @@
     min-width: 100%;
     box-sizing: border-box;
     padding: 20px;
-    height: 500px;
+    height: 70vh;
     flex-shrink: 0;
     display: flex;
     justify-content: center;

@@ -63,7 +63,7 @@
 
 .header {
     display: flex;
-    height: 130px;
+    height: 18vh;
     position: relative;
     background: #5e7153;
     overflow: hidden;
