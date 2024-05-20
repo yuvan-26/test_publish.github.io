@@ -1,0 +1,41 @@
+.slider-container {
+    width: 80%;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide-card {
+    min-width: 33.33%;
+    box-sizing: border-box;
+    height: 400px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.dots-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
