@@ -106,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div><strong>Description:</strong> ${plant['Description']}</div>
                 </div>
                 <div style="width: 40%;">
-                    <div style="overflow: hidden; width: 350px; height: 350px">
-                        <img src="${plant['Image Url']}" alt="${plant['Common Name']} Image">
+                    <div class="image-container-plant">
+                        <img id="library-img" style="height: 350px; transform: 0.5s"src="${plant['Image Url']}" alt="${plant['Common Name']} Image">
                     </div>
                 </div>
             </div>

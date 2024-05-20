@@ -129,12 +129,16 @@
 }
 
 .image-container-plant {
-    width: 100%;
-    height: 70%;
+    width: 350px;
+    height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     border-width: 0px;
     padding: 0px;
+}
+
+#library-img:hover {
+    transform: scale(1.1);
 }
