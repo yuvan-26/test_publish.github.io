@@ -22,7 +22,7 @@ function startAnimation() {
 
     // After animation, show text below
     setTimeout(() => {
-        document.getElementById('k-text-below').innerText = 'Natural Forests lost in Victoria, Australian 2023';
+        document.getElementById('k-text-below').innerText = 'Natural Forests lost in Victoria, Australia 2023';
         document.getElementById('k-text-below').style.opacity = 1;
     }, 2000); // Delay to match the progress bar animation
 
