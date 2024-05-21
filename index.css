@@ -3,6 +3,7 @@
     overflow: hidden;
     margin: 0 auto;
     position: relative;
+    font-family: 'Jost';
 }
 
 .slider {
@@ -11,18 +12,22 @@
 }
 
 .slide-card {
-    min-width: 33.33%;
+    width: 33.33%;
     box-sizing: border-box;
-    height: 400px;
-    padding: 20px;
+    height: 66vh;
     text-align: center;
     font-size: 1.5em;
 }
 
 .slide-card-in {
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    height: 300px
+    padding: 20px;
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    height: 55vh;
+    border-radius: 10px;
+    width: 90%;
+    box-shadow: 0 0 15px rgba(0,
+            0, 0, 0.5);
 }
 
 .dots-container {
