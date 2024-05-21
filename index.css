@@ -172,3 +172,9 @@
 .single-slide-card:hover .overlay {
     background-color: rgba(0, 0, 0, 0.65);
 }
+
+.t-description {
+    font-size: 23px;
+    margin-top: 10px;
+    line-height: 4vh;
+}
